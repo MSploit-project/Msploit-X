@@ -5,13 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Msploit_X.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="Msploit_X">
+        Icon="/Assets/logo.ico"
+        Title="">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    
+    <TabControl>
+        <TabItem Header="Home">
+        </TabItem>
+	    <TabItem Header="Search">TODO: Search page</TabItem>
+        <TabItem Header="Scan">TODO: Scan page</TabItem>
+        <TabItem Header="Exploit">TODO: Exploit page</TabItem>
+        <TabItem Header="Connections">TODO: Connections page</TabItem>
+        <TabItem IsSelected="True" Header="Exploit-DB">
+            <TabControl TabStripPlacement="Left">
+                <TabItem Header="GHDB">
+                    <Grid RowDefinitions="1*,10*">
+                        <TextBox Grid.Row="0" Text="{Binding Ghdb.Search, Mode=TwoWay}"></TextBox>
+                        <ListBox Grid.Row="1" Items="{Binding Ghdb.Items}" Background="Transparent">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem>
+                                        <Button Command="{Binding openLink}">
+                                            <StackPanel Orientation="Vertical">
+                                                <Label Content="{Binding ShortDescription}"></Label>
+                                                <Label FontStyle="Italic" Content="{Binding TextualDescription}"></Label>
+                                            </StackPanel>
+                                        </Button>
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Exploits">
+                    <Grid RowDefinitions="1*,10*">
+                        <TextBox Grid.Row="0"></TextBox>
+                        <ListBox Grid.Row="1"></ListBox>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Info">
+                    <StackPanel>
+                        <Button Click="open_link_EDB">Download exploit-db</Button>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </TabItem>
+    </TabControl>
+    
 </Window>
