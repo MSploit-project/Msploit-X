@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Msploit_X.Views.MainWindow"
         Icon="/Assets/logo.ico"
-        Title="">
+        Title="MSploit-X">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -42,8 +42,20 @@
                 </TabItem>
                 <TabItem Header="Exploits">
                     <Grid RowDefinitions="1*,10*">
-                        <TextBox Grid.Row="0"></TextBox>
-                        <ListBox Grid.Row="1"></ListBox>
+                        <TextBox Grid.Row="0" Text="{Binding ExploitsSearch.Search}"></TextBox>
+                        <ListBox Grid.Row="1" Items="{Binding ExploitsSearch.Items}" Background="Transparent">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem>
+                                        <Button Command="{Binding openLink}">
+                                            <StackPanel Orientation="Vertical">
+                                                <Label Content="{Binding Description}"></Label>
+                                            </StackPanel>
+                                        </Button>
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Info">
