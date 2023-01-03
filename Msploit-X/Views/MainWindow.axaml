@@ -14,9 +14,10 @@
     
     <TabControl>
         <TabItem Header="Home">
+            Created by @gitmylo
         </TabItem>
 	    <TabItem Header="Search">TODO: Search page</TabItem>
-        <TabItem IsSelected="True" Header="Scan">
+        <TabItem Header="Scan">
             <TabControl TabStripPlacement="Left">
                 <TabItem Header="New">
                     <StackPanel>
@@ -33,7 +34,7 @@
                         </StackPanel>
                     </StackPanel>
                 </TabItem>
-                <TabItem IsSelected="True" Header="Results">
+                <TabItem Header="Results">
                     <Grid ColumnDefinitions="*,*,*">
                         <ListBox SelectedItem="{Binding Scan.SelectedResult}" Items="{Binding Scan.Results}">
                             <ListBox.ItemTemplate>
