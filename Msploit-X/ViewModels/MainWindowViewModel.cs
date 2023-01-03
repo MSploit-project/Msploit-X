@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Msploit_X.Models;
+using Msploit_X.Models.nmap;
 using ReactiveUI;
 
 namespace Msploit_X.ViewModels
@@ -10,6 +11,8 @@ namespace Msploit_X.ViewModels
     {
         private GHDB ghdb = new GHDB();
         private ExploitsSearch exploitsSearch = new ExploitsSearch();
+
+        private Scan scan = new Scan();
 
         public GHDB Ghdb
         {
@@ -21,6 +24,12 @@ namespace Msploit_X.ViewModels
         {
             get => exploitsSearch;
             set => this.RaiseAndSetIfChanged(ref exploitsSearch, value);
+        }
+
+        public Scan Scan
+        {
+            get => scan;
+            set => this.RaiseAndSetIfChanged(ref scan, value);
         }
     }
 }

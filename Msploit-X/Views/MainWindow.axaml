@@ -16,10 +16,64 @@
         <TabItem Header="Home">
         </TabItem>
 	    <TabItem Header="Search">TODO: Search page</TabItem>
-        <TabItem Header="Scan">TODO: Scan page</TabItem>
+        <TabItem IsSelected="True" Header="Scan">
+            <TabControl TabStripPlacement="Left">
+                <TabItem Header="New">
+                    <StackPanel>
+                        <Label>Ip address to scan:</Label>
+                        <TextBox Text="{Binding Scan.Ip}"></TextBox>
+                        <CheckBox IsChecked="{Binding Scan.Sv}">Service version detection</CheckBox>
+                        <CheckBox IsChecked="{Binding Scan.Osd}">OS detection</CheckBox>
+                        <Label>Speed:</Label>
+                        <Slider Minimum="0" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Scan.Speed}" />
+                        <Label>Custom args (may cause crashes):</Label>
+                        <TextBox Text="{Binding Scan.CustomArgs}"></TextBox>
+                        <StackPanel Orientation="Horizontal">
+                            <Button IsEnabled="{Binding Scan.CanScan}" Command="{Binding Scan.scan}">Scan</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem IsSelected="True" Header="Results">
+                    <Grid ColumnDefinitions="*,*,*">
+                        <ListBox SelectedItem="{Binding Scan.SelectedResult}" Items="{Binding Scan.Results}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding ScanName}"></Label>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox Grid.Column="1" SelectedItem="{Binding Scan.SelectedHost}" Items="{Binding Scan.SelectedResult.Hosts}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding ip}"></Label>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel Grid.Column="2">
+                            <Label Content="{Binding Scan.SelectedHost.ip}"></Label>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>Up:</Label>
+                                <Label Content="{Binding Scan.SelectedHost.up}"></Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>OS: </Label>
+                                <Label Content="{Binding Scan.SelectedHost.OsString}"></Label>
+                            </StackPanel>
+                            <ListBox Items="{Binding Scan.SelectedHost.ports}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding asText}"></Label>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </TabItem>
         <TabItem Header="Exploit">TODO: Exploit page</TabItem>
         <TabItem Header="Connections">TODO: Connections page</TabItem>
-        <TabItem IsSelected="True" Header="Exploit-DB">
+        <TabItem Header="Exploit-DB">
             <TabControl TabStripPlacement="Left">
                 <TabItem Header="GHDB">
                     <Grid RowDefinitions="1*,10*">
@@ -28,7 +82,7 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <ListBoxItem>
-                                        <Button Command="{Binding openLink}">
+                                        <Button Command="{Binding openLink}" Width="10000">
                                             <StackPanel Orientation="Vertical">
                                                 <Label Content="{Binding ShortDescription}"></Label>
                                                 <Label FontStyle="Italic" Content="{Binding TextualDescription}"></Label>
@@ -47,9 +101,10 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <ListBoxItem>
-                                        <Button Command="{Binding openLink}">
+                                        <Button Command="{Binding openLink}"  Width="10000">
                                             <StackPanel Orientation="Vertical">
                                                 <Label Content="{Binding Description}"></Label>
+                                                <Label Content="{Binding Platform}"></Label>
                                             </StackPanel>
                                         </Button>
                                     </ListBoxItem>
@@ -61,6 +116,7 @@
                 <TabItem Header="Info">
                     <StackPanel>
                         <Button Click="open_link_EDB">Download exploit-db</Button>
+                        <Button Click="open_link_DP">Default passwords</Button>
                     </StackPanel>
                 </TabItem>
             </TabControl>

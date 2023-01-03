@@ -27,5 +27,9 @@ namespace Msploit_X.Views
         {
             Process.Start(new ProcessStartInfo(edbLink) {UseShellExecute = true});
         }
+        private void open_link_DP(object? sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://cirt.net/passwords") {UseShellExecute = true});
+        }
     }
 }
