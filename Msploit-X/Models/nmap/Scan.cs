@@ -39,7 +39,7 @@ namespace Msploit_X.Models.nmap
         public void scan()
         {
             Directory.CreateDirectory("scans");
-            string command = ip +
+            string command = ip + " -v" +
                              (Sv? " -sV": "") +
                              (osd? " -O": "") +
                              $" -T{Speed}" +

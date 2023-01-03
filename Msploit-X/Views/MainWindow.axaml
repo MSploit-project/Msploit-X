@@ -16,7 +16,6 @@
         <TabItem Header="Home">
             Created by @gitmylo
         </TabItem>
-	    <TabItem Header="Search">TODO: Search page</TabItem>
         <TabItem Header="Scan">
             <TabControl TabStripPlacement="Left">
                 <TabItem Header="New">
@@ -72,8 +71,24 @@
                 </TabItem>
             </TabControl>
         </TabItem>
-        <TabItem Header="Exploit">TODO: Exploit page</TabItem>
-        <TabItem Header="Connections">TODO: Connections page</TabItem>
+        <TabItem IsSelected="{Binding Exploits.IsCurrentTab, Mode=TwoWay}" Header="Exploit">
+            <Grid ColumnDefinitions="*,*">
+                <TreeView Items="{Binding Exploits.Items}" SelectedItem="{Binding Exploits.SelectedItem, Mode=TwoWay}">
+                    <TreeView.ItemTemplate>
+                        <TreeDataTemplate ItemsSource="{Binding SubFilesAndFolders}">
+                            <TextBlock Text="{Binding strNodeText}"/>
+                        </TreeDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+                <TextBox FontFamily="Consolas" IsReadOnly="True" Text="{Binding Exploits.ExploitText}" Grid.Column="1" AcceptsReturn="True"></TextBox>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Connections">
+            <StackPanel>
+                <NumericUpDown Minimum="0" Maximum="65535" Value="{Binding ReverseShell.Port, Mode=TwoWay}"></NumericUpDown>
+                <Button Command="{Binding ReverseShell.openShell}" CommandParameter="{Binding ReverseShell.Port}">Create Connection</Button>
+            </StackPanel>
+        </TabItem>
         <TabItem Header="Exploit-DB">
             <TabControl TabStripPlacement="Left">
                 <TabItem Header="GHDB">
@@ -102,12 +117,15 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <ListBoxItem>
-                                        <Button Command="{Binding openLink}"  Width="10000">
-                                            <StackPanel Orientation="Vertical">
-                                                <Label Content="{Binding Description}"></Label>
-                                                <Label Content="{Binding Platform}"></Label>
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Command="{Binding openLink}">Open link</Button>
+                                                <Button Command="{Binding openExploit}">Open in exploit tab</Button>
                                             </StackPanel>
-                                        </Button>
+                                            <Label Content="{Binding Description}"></Label>
+                                            <Label Content="{Binding Platform}"></Label>
+                                            <Label Content="{Binding File}"></Label>
+                                        </StackPanel>
                                     </ListBoxItem>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

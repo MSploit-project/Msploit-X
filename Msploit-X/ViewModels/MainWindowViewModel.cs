@@ -14,6 +14,10 @@ namespace Msploit_X.ViewModels
 
         private Scan scan = new Scan();
 
+        private ReverseShell reverseShell = new ReverseShell();
+
+        public static Exploits exploits = new Exploits();
+
         public GHDB Ghdb
         {
             get => ghdb;
@@ -30,6 +34,18 @@ namespace Msploit_X.ViewModels
         {
             get => scan;
             set => this.RaiseAndSetIfChanged(ref scan, value);
+        }
+        
+        public ReverseShell ReverseShell
+        {
+            get => reverseShell;
+            set => this.RaiseAndSetIfChanged(ref reverseShell, value);
+        }
+
+        public Exploits Exploits
+        {
+            get => exploits;
+            set => this.RaiseAndSetIfChanged(ref exploits, value);
         }
     }
 }

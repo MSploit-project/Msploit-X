@@ -41,6 +41,9 @@ namespace Msploit_X
 
                         found.ip = host1.address.addr;
                         found.up = host1.status.state == statusState.up;
+                        
+                        if (host1.Items == null) continue;
+                        
                         foreach (var item in host1.Items)
                         {
                             Type type = item.GetType();
