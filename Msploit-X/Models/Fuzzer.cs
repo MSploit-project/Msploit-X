@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -84,7 +85,7 @@ namespace Msploit_X.Models
         }
 
         public void start()
-        {//FUZZ.crazymails.nl
+        {
             if (SelectedFile == "Select File") return;
             Running = true;
             fuzzThread = new Thread(fuzz);
@@ -101,6 +102,8 @@ namespace Msploit_X.Models
             Results.Clear();
             string[] wordlistItems = File.ReadAllLines(selectedFile);
             Total = wordlistItems.Length;
+
+            ConcurrentBag<result> resultsBag = new ConcurrentBag<result>();
             Parallel.For(0, total, new ParallelOptions() {MaxDegreeOfParallelism = 50}, i =>
             {
                 //if (!Running) return;
@@ -109,8 +112,13 @@ namespace Msploit_X.Models
                 var item = wordlistItems[i];
                 string targetUrl = target.Replace("FUZZ", item);
                 
-                if (checkUrl(targetUrl)) Results.Add(new result() {Url = targetUrl});
+                if (checkUrl(targetUrl)) resultsBag.Add(new result() {Url = targetUrl});
             });
+
+            foreach (var result in resultsBag)
+            {
+                Results.Add(result);
+            }
 
             Progress = Total;
 
@@ -145,7 +153,6 @@ namespace Msploit_X.Models
             }
             catch (Exception e)
             {
-                Process.Start("Cmd.exe", "/k echo " + e.Message);
                 return false;
             }
 
@@ -156,6 +163,5 @@ namespace Msploit_X.Models
     public class result
     {
         public string Url { get; set; }
-        public HttpStatusCode StatusCode { get; set; }
     }
 }

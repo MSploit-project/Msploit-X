@@ -191,6 +191,8 @@
                         <Label>Encoding/Decoding</Label>
                         <Button Command="{Binding open_link}" CommandParameter="https://base64decode.org/">Base64decode</Button>
                         <Button Command="{Binding open_link}" CommandParameter="https://gchq.github.io/CyberChef/">CyberChef</Button>
+                        <Label>WordLists</Label>
+                        <Button Command="{Binding open_link}" CommandParameter="https://github.com/danielmiessler/SecLists">Seclists</Button>
                     </ListBox>
                 </TabItem>
             </TabControl>
