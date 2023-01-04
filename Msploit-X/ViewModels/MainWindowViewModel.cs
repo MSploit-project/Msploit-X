@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Msploit_X.Models;
 using Msploit_X.Models.nmap;
@@ -46,6 +47,11 @@ namespace Msploit_X.ViewModels
         {
             get => exploits;
             set => this.RaiseAndSetIfChanged(ref exploits, value);
+        }
+
+        public void open_link(string link)
+        {
+            Process.Start(new ProcessStartInfo(link) {UseShellExecute = true});
         }
     }
 }

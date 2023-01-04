@@ -140,6 +140,31 @@
                 </TabItem>
             </TabControl>
         </TabItem>
+        <TabItem Header="Tools">
+            <TabControl TabStripPlacement="Left">
+                <TabItem Header="Tools">
+                    <ListBox>
+                        <Button Command="{Binding open_link}" CommandParameter="https://docs.metasploit.com/docs/using-metasploit/getting-started/nightly-installers.html">Metasploit framework</Button>
+                        <Button Command="{Binding open_link}" CommandParameter="https://github.com/calebstewart/pwncat">Pwncat reverse shell handler</Button>
+                    </ListBox>
+                </TabItem>
+                <TabItem Header="Dns and search">
+                    <ListBox>
+                        <Button Command="{Binding open_link}" CommandParameter="https://dnsdumpster.com/">DnsDumpster</Button>
+                        <Button Command="{Binding open_link}" CommandParameter="https://www.shodan.io/">Shodan</Button>
+                    </ListBox>
+                </TabItem>
+                <TabItem Header="Other">
+                    <ListBox>
+                        <Label>Osint</Label>
+                        <Button Command="{Binding open_link}" CommandParameter="https://osintframework.com/">Osint Framework</Button>
+                        <Label>Encoding/Decoding</Label>
+                        <Button Command="{Binding open_link}" CommandParameter="https://base64decode.org/">Base64decode</Button>
+                        <Button Command="{Binding open_link}" CommandParameter="https://gchq.github.io/CyberChef/">CyberChef</Button>
+                    </ListBox>
+                </TabItem>
+            </TabControl>
+        </TabItem>
     </TabControl>
     
 </Window>
