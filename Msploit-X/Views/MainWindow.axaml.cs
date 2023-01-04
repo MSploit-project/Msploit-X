@@ -8,12 +8,15 @@ namespace Msploit_X.Views
 {
     public partial class MainWindow : Window
     {
+        public static MainWindow instance;
+        
         public MainWindow()
         {
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
+            instance = this;
         }
 
         private void InitializeComponent()

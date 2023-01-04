@@ -19,6 +19,8 @@ namespace Msploit_X.ViewModels
 
         public static Exploits exploits = new Exploits();
 
+        private Fuzzer fuzzer = new Fuzzer();
+
         public GHDB Ghdb
         {
             get => ghdb;
@@ -47,6 +49,12 @@ namespace Msploit_X.ViewModels
         {
             get => exploits;
             set => this.RaiseAndSetIfChanged(ref exploits, value);
+        }
+
+        public Fuzzer Fuzzer
+        {
+            get => fuzzer;
+            set => this.RaiseAndSetIfChanged(ref fuzzer, value);
         }
 
         public void open_link(string link)

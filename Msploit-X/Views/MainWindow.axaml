@@ -71,6 +71,36 @@
                 </TabItem>
             </TabControl>
         </TabItem>
+        <TabItem Header="Fuzz">
+            <TabControl TabStripPlacement="Left">
+                <TabItem Header="Fuzz">
+                    <StackPanel>
+                        <Label>Target:</Label>
+                        <TextBox Text="{Binding Fuzzer.Target, Mode=TwoWay}"/>
+                        <Label>WordList:</Label>
+                        <Button Content="{Binding Fuzzer.SelectedFile, Mode=OneWay}" Command="{Binding Fuzzer.openFileDialog}"></Button>
+                        <Label>Mode (0 for web, 1 for ping):</Label>
+                        <Label Content="{Binding Fuzzer.Mode}"/>
+                        <Slider IsSnapToTickEnabled="True" TickFrequency="1" Minimum="0" Maximum="1" Value="{Binding Fuzzer.Mode, Mode=TwoWay}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button IsEnabled="{Binding !Fuzzer.Running}" Command="{Binding Fuzzer.start}">Start</Button>
+                            <Button IsEnabled="{Binding Fuzzer.Running}" Command="{Binding Fuzzer.stop}">Stop</Button>
+                        </StackPanel>
+                        <ProgressBar Height="10" Minimum="0" Maximum="{Binding Fuzzer.Total}" Value="{Binding Fuzzer.Progress}"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Results">
+                    <ListBox Background="Transparent" Items="{Binding Fuzzer.Results}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <ListBoxItem Content="{Binding Url}">
+                                </ListBoxItem>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </TabItem>
+            </TabControl>
+        </TabItem>
         <TabItem IsSelected="{Binding Exploits.IsCurrentTab, Mode=TwoWay}" Header="Exploit">
             <Grid ColumnDefinitions="*,*">
                 <TreeView Items="{Binding Exploits.Items}" SelectedItem="{Binding Exploits.SelectedItem, Mode=TwoWay}">
