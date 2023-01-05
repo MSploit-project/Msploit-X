@@ -6,13 +6,14 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Msploit_X.Views.MainWindow"
         Icon="/Assets/logo.ico"
-        Title="MSploit-X">
+        Title="MSploit-X"
+        Closing="Window_OnClosing">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
     
-    <TabControl>
+    <TabControl >
         <TabItem Header="Home">
             Created by @gitmylo
         </TabItem>
@@ -113,9 +114,50 @@
                 <TextBox FontFamily="Consolas" IsReadOnly="True" Text="{Binding Exploits.ExploitText}" Grid.Column="1" AcceptsReturn="True"></TextBox>
             </Grid>
         </TabItem>
+        <TabItem Header="Web server">
+            <TabControl TabStripPlacement="Left">
+                <TabItem Header="Server">
+                    <StackPanel>
+                        <Label>Port:</Label>
+                        <NumericUpDown Minimum="1" Maximum="65535" Value="{Binding WebServer.Port, Mode=TwoWay}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding WebServer.start}" IsEnabled="{Binding !WebServer.Running}">Start</Button>
+                            <Button Command="{Binding WebServer.stop}" IsEnabled="{Binding WebServer.Running}">Stop</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Files">
+                    <Grid ColumnDefinitions="*,*">
+                        <ListBox SelectedItem="{Binding WebServer.SelectedPage, Mode=TwoWay}" Items="{Binding WebServer.Pages}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem Content="{Binding Url}"></ListBoxItem>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel Grid.Column="1">
+                            <Grid RowDefinitions="*,*">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Command="{Binding WebServer.removeSelected}">Remove</Button>
+                                        <Button Command="{Binding WebServer.addPath}">Add</Button>
+                                    </StackPanel>
+                                    <TextBox Text="{Binding WebServer.SelectedPage.Url, Mode=TwoWay}"></TextBox>
+                                    <TextBox Text="{Binding WebServer.SelectedPage.ContentType, Mode=TwoWay}"></TextBox>
+                                </StackPanel>
+                                <TextBox Grid.Row="1" Height="200" AcceptsReturn="True" Text="{Binding WebServer.SelectedPage.dataString, Mode=TwoWay}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Console">
+                    <TextBox AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Text="{Binding WebServer.ConsoleLog}"/>
+                </TabItem>
+            </TabControl>
+        </TabItem>
         <TabItem Header="Connections">
             <StackPanel>
-                <NumericUpDown Minimum="0" Maximum="65535" Value="{Binding ReverseShell.Port, Mode=TwoWay}"></NumericUpDown>
+                <NumericUpDown Minimum="1" Maximum="65535" Value="{Binding ReverseShell.Port, Mode=TwoWay}"></NumericUpDown>
                 <Button Command="{Binding ReverseShell.openShell}" CommandParameter="{Binding ReverseShell.Port}">Create Connection</Button>
             </StackPanel>
         </TabItem>
@@ -193,6 +235,8 @@
                         <Button Command="{Binding open_link}" CommandParameter="https://gchq.github.io/CyberChef/">CyberChef</Button>
                         <Label>WordLists</Label>
                         <Button Command="{Binding open_link}" CommandParameter="https://github.com/danielmiessler/SecLists">Seclists</Button>
+                        <Label>Cracking</Label>
+                        <Button Command="{Binding open_link}" CommandParameter="https://crackstation.net/">Crackstation</Button>
                     </ListBox>
                 </TabItem>
             </TabControl>

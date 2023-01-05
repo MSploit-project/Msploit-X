@@ -1,8 +1,11 @@
+using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Msploit_X.ViewModels;
 
 namespace Msploit_X.Views
 {
@@ -33,6 +36,12 @@ namespace Msploit_X.Views
         private void open_link_DP(object? sender, RoutedEventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://cirt.net/passwords") {UseShellExecute = true});
+        }
+
+        private void Window_OnClosing(object? sender, CancelEventArgs e)
+        {
+            MainWindowViewModel.instance.WebServer.stop();
+            Environment.Exit(0);
         }
     }
 }

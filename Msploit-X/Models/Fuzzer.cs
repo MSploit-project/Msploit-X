@@ -102,17 +102,19 @@ namespace Msploit_X.Models
             Results.Clear();
             string[] wordlistItems = File.ReadAllLines(selectedFile);
             Total = wordlistItems.Length;
+            Progress = 0;
 
             ConcurrentBag<result> resultsBag = new ConcurrentBag<result>();
             Parallel.For(0, total, new ParallelOptions() {MaxDegreeOfParallelism = 50}, i =>
             {
-                //if (!Running) return;
+                if (!Running) return;
                 
-                Progress = i;
                 var item = wordlistItems[i];
                 string targetUrl = target.Replace("FUZZ", item);
                 
                 if (checkUrl(targetUrl)) resultsBag.Add(new result() {Url = targetUrl});
+
+                ++Progress;
             });
 
             foreach (var result in resultsBag)
@@ -140,6 +142,7 @@ namespace Msploit_X.Models
                 {
                     case 0://WEB
                         HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+                        request.Timeout = 500;
                         request.Method = "HEAD";
                         HttpWebResponse response = request.GetResponse() as HttpWebResponse;
                         var statusCode = response.StatusCode;

@@ -10,6 +10,13 @@ namespace Msploit_X.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        public static MainWindowViewModel instance;
+
+        public MainWindowViewModel()
+        {
+            instance = this;
+        }
+        
         private GHDB ghdb = new GHDB();
         private ExploitsSearch exploitsSearch = new ExploitsSearch();
 
@@ -20,6 +27,8 @@ namespace Msploit_X.ViewModels
         public static Exploits exploits = new Exploits();
 
         private Fuzzer fuzzer = new Fuzzer();
+
+        private WebServer webServer = new WebServer();
 
         public GHDB Ghdb
         {
@@ -55,6 +64,12 @@ namespace Msploit_X.ViewModels
         {
             get => fuzzer;
             set => this.RaiseAndSetIfChanged(ref fuzzer, value);
+        }
+
+        public WebServer WebServer
+        {
+            get => webServer;
+            set => this.RaiseAndSetIfChanged(ref webServer, value);
         }
 
         public void open_link(string link)
