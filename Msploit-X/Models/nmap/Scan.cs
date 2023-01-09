@@ -31,16 +31,40 @@ namespace Msploit_X.Models.nmap
             set => this.RaiseAndSetIfChanged(ref selectedHost, value);
         }
 
+        public ObservableCollection<ScanType> scanTypes { get; } = new ObservableCollection<ScanType>()
+        {
+            new("-sS", "SYN Half open scan", "Fast and stealthy"),
+            new("-sT", "TCP connect() scan", "Makes a full tcp connection, slow"),
+            new("-sU", "UDP scan", "Checks UDP ports, not very reliable"),
+            new("-sA", "ACK scan", "Map firewall rulesets (probably don't use)"),
+            new("-sW", "Window scan", "Same as ack, but with ability to detect open ports"),
+            new("-sM", "Maimon scan", "same as NULL, FIN, and Xmas, but with FIN/ACK"),
+            new("-sN", "TCP NULL scan", "Sends a null packet, even stealthier than SYN"),
+            new("-sF", "TCP FIN scan", "Sends a FIN packet, stealthier than SYN"),
+            new("-sX", "TCP Xmas scan", "Sends a random packet, stealthier than SYN"),
+        };
+
+        private ScanType selectedScanType;
+
+        public ScanType SelectedScanType
+        {
+            get => selectedScanType;
+            set => this.RaiseAndSetIfChanged(ref selectedScanType, value);
+        }
+
         public Scan()
         {
-            
+            SelectedScanType = scanTypes[0];
         }
         
         public void scan()
         {
             Directory.CreateDirectory("scans");
             string command = ip + " -v" +
+                             $" {SelectedScanType.flag}" +
+                             $" {Ports}" +
                              (Sv? " -sV": "") +
+                             (Agressive? " -A": "") +
                              (osd? " -O": "") +
                              $" -T{Speed}" +
                              $" {customArgs}";
@@ -72,6 +96,14 @@ namespace Msploit_X.Models.nmap
             set => this.RaiseAndSetIfChanged(ref ip, value);
         }
         
+        private string ports = "";
+
+        public string Ports
+        {
+            get => ports;
+            set => this.RaiseAndSetIfChanged(ref ports, value);
+        }
+        
         private string customArgs = "";
 
         public string CustomArgs
@@ -88,6 +120,14 @@ namespace Msploit_X.Models.nmap
             set => this.RaiseAndSetIfChanged(ref sv, value);
         }
         
+        private bool aggressive = false;
+
+        public bool Agressive
+        {
+            get => aggressive;
+            set => this.RaiseAndSetIfChanged(ref aggressive, value);
+        }
+        
         private bool osd = true;
 
         public bool Osd
@@ -102,6 +142,20 @@ namespace Msploit_X.Models.nmap
         {
             get => speed;
             set => this.RaiseAndSetIfChanged(ref speed, value);
+        }
+    }
+
+    public class ScanType
+    {
+        public string flag { get; }
+        public string description { get; }
+        public string tooltip { get; }
+
+        public ScanType(string flag, string description, string tooltip)
+        {
+            this.flag = flag;
+            this.description = description;
+            this.tooltip = tooltip;
         }
     }
 }

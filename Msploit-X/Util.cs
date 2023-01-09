@@ -77,15 +77,14 @@ namespace Msploit_X
                                     {
                                         foreach (port portFound in portInfo.port)
                                         {
-                                            if (portFound.state.state1.ToLower().StartsWith("open"))
-                                            {
-                                                Port addport = new Port();
-                                                addport.portNum = portFound.portid;
-                                                addport.protocol = portFound.protocol.ToString();
-                                                addport.service = portFound.service.name;
-                                                addport.serviceProduct = portFound.service.product;
-                                                found.ports.Add(addport);
-                                            }
+                                            Port addport = new Port();
+                                            addport.type = portFound.protocol.ToString();
+                                            addport.portNum = portFound.portid;
+                                            addport.state = portFound.state.state1;
+                                            addport.protocol = portFound.protocol.ToString();
+                                            addport.service = portFound.service.name;
+                                            addport.serviceProduct = portFound.service.product;
+                                            found.ports.Add(addport);
                                         }
                                     }
                                     break;

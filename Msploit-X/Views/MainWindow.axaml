@@ -20,22 +20,37 @@
         <TabItem Header="Scan">
             <TabControl TabStripPlacement="Left">
                 <TabItem Header="New">
-                    <StackPanel>
-                        <Label>Ip address to scan:</Label>
-                        <TextBox Text="{Binding Scan.Ip}"></TextBox>
-                        <CheckBox IsChecked="{Binding Scan.Sv}">Service version detection</CheckBox>
-                        <CheckBox IsChecked="{Binding Scan.Osd}">OS detection</CheckBox>
-                        <Label>Speed:</Label>
-                        <Slider Minimum="0" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Scan.Speed}" />
-                        <Label>Custom args (may cause crashes):</Label>
-                        <TextBox Text="{Binding Scan.CustomArgs}"></TextBox>
-                        <StackPanel Orientation="Horizontal">
-                            <Button IsEnabled="{Binding Scan.CanScan}" Command="{Binding Scan.scan}">Scan</Button>
+                    <ScrollViewer>
+                        <StackPanel>
+                            <Grid ColumnDefinitions="1*,3*" RowDefinitions="*,*">
+                                <Label>Type of scan:</Label>
+                                <ComboBox Grid.Column="0" Grid.Row="1" Items="{Binding Scan.scanTypes}" SelectedItem="{Binding Scan.SelectedScanType, Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label ToolTip.Tip="{Binding tooltip}" Content="{Binding description}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Label Grid.Row="0" Grid.Column="1">Ip address to scan (put -iR (Number) for random):</Label>
+                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Scan.Ip}"></TextBox>
+                            </Grid>
+                            <Label>Ports (prepend with -) (empty for default, -F for fast, --top-ports (number)):</Label>
+                            <TextBox Text="{Binding Scan.Ports, Mode=TwoWay}"/>
+                            <CheckBox IsChecked="{Binding Scan.Sv}">Service version detection</CheckBox>
+                            <CheckBox IsChecked="{Binding Scan.Osd}">OS detection</CheckBox>
+                            <CheckBox IsChecked="{Binding Scan.Agressive}">Aggressive scan (os detect, version detect, script scan, traceroute)</CheckBox>
+                            <Label>Speed:</Label>
+                            <Slider Minimum="0" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Scan.Speed}" />
+                            <Label>Custom args (may cause crashes):</Label>
+                            <TextBox Text="{Binding Scan.CustomArgs}"></TextBox>
+                            <StackPanel Orientation="Horizontal">
+                                <Button IsEnabled="{Binding Scan.CanScan}" Command="{Binding Scan.scan}">Scan</Button>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Results">
-                    <Grid ColumnDefinitions="*,*,*">
+                    <Grid ColumnDefinitions="1*,1*,5*">
                         <ListBox SelectedItem="{Binding Scan.SelectedResult}" Items="{Binding Scan.Results}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -50,24 +65,26 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <StackPanel Grid.Column="2">
-                            <Label Content="{Binding Scan.SelectedHost.ip}"></Label>
-                            <StackPanel Orientation="Horizontal">
-                                <Label>Up:</Label>
-                                <Label Content="{Binding Scan.SelectedHost.up}"></Label>
+                        <ScrollViewer Grid.Column="2">
+                            <StackPanel>
+                                <Label Content="{Binding Scan.SelectedHost.ip}"></Label>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label>Up:</Label>
+                                    <Label Content="{Binding Scan.SelectedHost.up}"></Label>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label>OS: </Label>
+                                    <Label Content="{Binding Scan.SelectedHost.OsString}"></Label>
+                                </StackPanel>
+                                <ListBox Items="{Binding Scan.SelectedHost.ports}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding asText}"></Label>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <Label>OS: </Label>
-                                <Label Content="{Binding Scan.SelectedHost.OsString}"></Label>
-                            </StackPanel>
-                            <ListBox Items="{Binding Scan.SelectedHost.ports}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding asText}"></Label>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
+                        </ScrollViewer>
                     </Grid>
                 </TabItem>
             </TabControl>
@@ -208,6 +225,7 @@
                     <StackPanel>
                         <Button Click="open_link_EDB">Download exploit-db</Button>
                         <Button Click="open_link_DP">Default passwords</Button>
+                        <Button Command="{Binding open_link}" CommandParameter="https://www.rapid7.com/db/">Rapid7 db</Button>
                     </StackPanel>
                 </TabItem>
             </TabControl>
@@ -218,6 +236,8 @@
                     <ListBox>
                         <Button Command="{Binding open_link}" CommandParameter="https://docs.metasploit.com/docs/using-metasploit/getting-started/nightly-installers.html">Metasploit framework</Button>
                         <Button Command="{Binding open_link}" CommandParameter="https://github.com/calebstewart/pwncat">Pwncat reverse shell handler</Button>
+                        <Button Command="{Binding open_link}" CommandParameter="https://www.tenable.com/downloads/nessus">Nessus scanner (essential is free)</Button>
+                        <Button Command="{Binding open_link}" CommandParameter="https://nmap.org/download.html">Nmap</Button>
                     </ListBox>
                 </TabItem>
                 <TabItem Header="Dns and search">
