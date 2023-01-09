@@ -69,6 +69,11 @@ namespace Msploit_X.Models.nmap
         {
             ports = new();
         }
+        
+        public string asUrl
+        {
+            get => $"http://{ip}/";
+        }
     }
 
     public class Port

@@ -72,7 +72,10 @@
                         </ListBox>
                         <ScrollViewer Grid.Column="2">
                             <StackPanel>
-                                <Button Command="{Binding Scan.copySelectedIp}" Content="{Binding Scan.SelectedHost.ip}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Command="{Binding Scan.copySelectedIp}" Content="{Binding Scan.SelectedHost.ip}"/>
+                                    <Button Command="{Binding open_link}" CommandParameter="{Binding Scan.SelectedHost.asUrl}">Open in browser</Button>
+                                </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label>Up:</Label>
                                     <Label Content="{Binding Scan.SelectedHost.up}"/>
