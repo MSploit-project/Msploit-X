@@ -29,7 +29,9 @@ namespace Msploit_X
             var xmlSerializer = new XmlSerializer(typeof(nmaprun));
             var result = default(nmaprun);
             ObservableCollection<Host> hosts = new ObservableCollection<Host>();
-            using (var xmlStream = new StreamReader(resultFile))
+            try
+            {
+                using (var xmlStream = new StreamReader(resultFile))
             {
                 result = xmlSerializer.Deserialize(xmlStream) as nmaprun;
                 foreach (var host1var in result.Items)
@@ -84,6 +86,7 @@ namespace Msploit_X
                                             addport.protocol = portFound.protocol.ToString();
                                             addport.service = portFound.service.name;
                                             addport.serviceProduct = portFound.service.product;
+                                            addport.serviceVersion = portFound.service.version;
                                             found.ports.Add(addport);
                                         }
                                     }
@@ -100,7 +103,11 @@ namespace Msploit_X
                     }
                 }
             }
-
+            }
+            catch (Exception e)
+            {
+                return new Result() {Hosts = hosts, ScanName = DateTime.Now.ToShortTimeString() + " -Cancelled"};
+            }
             return new Result() {Hosts = hosts, ScanName = DateTime.Now.ToShortTimeString()};
         }
     }

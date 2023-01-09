@@ -15,7 +15,11 @@
     
     <TabControl >
         <TabItem Header="Home">
-            Created by @gitmylo
+            <StackPanel>
+                <Label>
+                    Created by @gitmylo
+                </Label>
+            </StackPanel>
         </TabItem>
         <TabItem Header="Scan">
             <TabControl TabStripPlacement="Left">
@@ -34,14 +38,15 @@
                                 <Label Grid.Row="0" Grid.Column="1">Ip address to scan (put -iR (Number) for random):</Label>
                                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Scan.Ip}"></TextBox>
                             </Grid>
-                            <Label>Ports (prepend with -) (empty for default, -F for fast, --top-ports (number)):</Label>
+                            <Label>Ports (prepend with -p) (empty for default, -F for fast, --top-ports (number)):</Label>
                             <TextBox Text="{Binding Scan.Ports, Mode=TwoWay}"/>
                             <CheckBox IsChecked="{Binding Scan.Sv}">Service version detection</CheckBox>
                             <CheckBox IsChecked="{Binding Scan.Osd}">OS detection</CheckBox>
                             <CheckBox IsChecked="{Binding Scan.Agressive}">Aggressive scan (os detect, version detect, script scan, traceroute)</CheckBox>
+                            <CheckBox IsChecked="{Binding Scan.Pn}">Treat hosts as online</CheckBox>
                             <Label>Speed:</Label>
                             <Slider Minimum="0" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Scan.Speed}" />
-                            <Label>Custom args (may cause crashes):</Label>
+                            <Label>Custom args (for example --open) (may cause crashes):</Label>
                             <TextBox Text="{Binding Scan.CustomArgs}"></TextBox>
                             <StackPanel Orientation="Horizontal">
                                 <Button IsEnabled="{Binding Scan.CanScan}" Command="{Binding Scan.scan}">Scan</Button>
@@ -67,14 +72,14 @@
                         </ListBox>
                         <ScrollViewer Grid.Column="2">
                             <StackPanel>
-                                <Label Content="{Binding Scan.SelectedHost.ip}"></Label>
+                                <Button Command="{Binding Scan.copySelectedIp}" Content="{Binding Scan.SelectedHost.ip}"/>
                                 <StackPanel Orientation="Horizontal">
                                     <Label>Up:</Label>
-                                    <Label Content="{Binding Scan.SelectedHost.up}"></Label>
+                                    <Label Content="{Binding Scan.SelectedHost.up}"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label>OS: </Label>
-                                    <Label Content="{Binding Scan.SelectedHost.OsString}"></Label>
+                                    <Label Content="{Binding Scan.SelectedHost.OsString}"/>
                                 </StackPanel>
                                 <ListBox Items="{Binding Scan.SelectedHost.ports}">
                                     <ListBox.ItemTemplate>

@@ -76,13 +76,14 @@ namespace Msploit_X.Models.nmap
         public string portNum { get; set; }
         public string? service { get; set; }
         public string? serviceProduct { get; set; }
+        public string serviceVersion { get; set; }
         public string protocol { get; set; }
         public string state { get; set; }
         public string type { get; set; }
 
         public string asText
         {
-            get => $"{type} - {portNum} - {state} - {service} - {serviceProduct}";
+            get => $"{type} - {portNum} - {state} - {service} - {serviceProduct} - {serviceVersion}";
         }
     }
 }

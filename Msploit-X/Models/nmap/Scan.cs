@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading;
+using Avalonia;
 using ReactiveUI;
 
 namespace Msploit_X.Models.nmap
@@ -64,6 +65,7 @@ namespace Msploit_X.Models.nmap
                              $" {SelectedScanType.flag}" +
                              $" {Ports}" +
                              (Sv? " -sV": "") +
+                             (Pn? " -Pn": "") +
                              (Agressive? " -A": "") +
                              (osd? " -O": "") +
                              $" -T{Speed}" +
@@ -135,6 +137,14 @@ namespace Msploit_X.Models.nmap
             get => osd;
             set => this.RaiseAndSetIfChanged(ref osd, value);
         }
+        
+        private bool pn = false;
+
+        public bool Pn
+        {
+            get => pn;
+            set => this.RaiseAndSetIfChanged(ref pn, value);
+        }
 
         private int speed = 3;
 
@@ -142,6 +152,11 @@ namespace Msploit_X.Models.nmap
         {
             get => speed;
             set => this.RaiseAndSetIfChanged(ref speed, value);
+        }
+
+        public void copySelectedIp()
+        {
+            Application.Current.Clipboard.SetTextAsync(selectedHost.ip);
         }
     }
 
