@@ -74,11 +74,12 @@ namespace Msploit_X.Models
             Running = true;
             new Thread(() =>
             {
-                StreamReader reader = new StreamReader(PasswordFile);
-                while (!reader.EndOfStream && Running)
+                Parallel.ForEach(File.ReadAllLines(PasswordFile), new ParallelOptions()
                 {
-                    string password = reader.ReadLine();
-                    if (password == "") continue;
+                    MaxDegreeOfParallelism = 16
+                }, (password) =>
+                {
+                    if (password == "" || !Running) return;
                     password = HttpUtility.UrlEncode(password);
                     CurrentPass = password;
                     if (check(Url, Post, password, FailedString))
@@ -86,8 +87,7 @@ namespace Msploit_X.Models
                         Running = false;
                         SuccessPass = password;
                     }
-                }
-
+                });
                 Running = false;
             }).Start();
         }
