@@ -49,7 +49,7 @@ namespace Msploit_X.Models.nmap
         public ObservableCollection<Script> scripts { get; } = new()
         {
             new("", "No script", "Don't run a script"),
-            new("--script=safe", "save", "Won't affect the target"),
+            new("--script=safe", "safe", "Won't affect the target"),
             new("--script=intrusive", "intrusive", "Not safe: likely to affect the target"),
             new("--script=vuln", "vuln", "Scan for vulnerabilities"),
             new("--script=exploit", "exploit", "Attempt to exploit a vulnerability"),
