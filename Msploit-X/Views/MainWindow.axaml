@@ -43,6 +43,14 @@
                             </Grid>
                             <Label>Ports (prepend with -p) (empty for default, -F for fast, --top-ports (number)):</Label>
                             <TextBox Text="{Binding Scan.Ports, Mode=TwoWay}"/>
+                            <Label>Script</Label>
+                            <ComboBox Items="{Binding Scan.scripts}" SelectedItem="{Binding Scan.selectedScript.Value, Mode=TwoWay}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label ToolTip.Tip="{Binding tooltip}" Content="{Binding description}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                             <CheckBox IsChecked="{Binding Scan.Sv}">Service version detection</CheckBox>
                             <CheckBox IsChecked="{Binding Scan.Osd}">OS detection</CheckBox>
                             <CheckBox IsChecked="{Binding Scan.Agressive}">Aggressive scan (os detect, version detect, script scan, traceroute)</CheckBox>

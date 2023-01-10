@@ -2,7 +2,7 @@
 
 namespace Msploit_X.ViewModels.Objects
 {
-    public class ReactiveType<T> : ReactiveObject
+    public class ObservableType<T> : ReactiveObject
     {
         private T valueB;
         public T Value
@@ -10,7 +10,7 @@ namespace Msploit_X.ViewModels.Objects
             get => valueB;
             set => this.RaiseAndSetIfChanged(ref valueB, value);
         }
-        public ReactiveType(T value)
+        public ObservableType(T value)
         {
             this.Value = value;
         }

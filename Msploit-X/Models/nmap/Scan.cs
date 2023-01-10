@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using Avalonia;
+using Msploit_X.ViewModels.Objects;
 using ReactiveUI;
 
 namespace Msploit_X.Models.nmap
@@ -32,7 +33,7 @@ namespace Msploit_X.Models.nmap
             set => this.RaiseAndSetIfChanged(ref selectedHost, value);
         }
 
-        public ObservableCollection<ScanType> scanTypes { get; } = new ObservableCollection<ScanType>()
+        public ObservableCollection<ScanType> scanTypes { get; } = new()
         {
             new("-sS", "SYN Half open scan", "Fast and stealthy"),
             new("-sT", "TCP connect() scan", "Makes a full tcp connection, slow"),
@@ -45,6 +46,20 @@ namespace Msploit_X.Models.nmap
             new("-sX", "TCP Xmas scan", "Sends a random packet, stealthier than SYN"),
         };
 
+        public ObservableCollection<Script> scripts { get; } = new()
+        {
+            new("", "No script", "Don't run a script"),
+            new("--script=safe", "save", "Won't affect the target"),
+            new("--script=intrusive", "intrusive", "Not safe: likely to affect the target"),
+            new("--script=vuln", "vuln", "Scan for vulnerabilities"),
+            new("--script=exploit", "exploit", "Attempt to exploit a vulnerability"),
+            new("--script=auth", "auth", "Attempt to bypass authentication for running services"),
+            new("--script=brute", "brute", "Attempt to bruteforce credentials for running services"),
+            new("--script=discovery", "discovery", "Attempt to query running services for further information about the network"),
+        };
+
+        public ObservableType<Script> selectedScript { get; } = new(null);
+
         private ScanType selectedScanType;
 
         public ScanType SelectedScanType
@@ -56,6 +71,7 @@ namespace Msploit_X.Models.nmap
         public Scan()
         {
             SelectedScanType = scanTypes[0];
+            selectedScript.Value = scripts[0];
         }
         
         public void scan()
@@ -69,6 +85,7 @@ namespace Msploit_X.Models.nmap
                              (Agressive? " -A": "") +
                              (osd? " -O": "") +
                              $" -T{Speed}" +
+                             $" {selectedScript.Value.flag}" +
                              $" {customArgs}";
             
             string dir = $"{Directory.GetCurrentDirectory()}\\scans\\{ip}.xml";
@@ -167,6 +184,19 @@ namespace Msploit_X.Models.nmap
         public string tooltip { get; }
 
         public ScanType(string flag, string description, string tooltip)
+        {
+            this.flag = flag;
+            this.description = description;
+            this.tooltip = tooltip;
+        }
+    }
+
+    public class Script
+    {
+        public string flag { get; }
+        public string description { get; }
+        public string tooltip { get; }
+        public Script(string flag, string description, string tooltip)
         {
             this.flag = flag;
             this.description = description;
