@@ -15,17 +15,20 @@
     
     <TabControl >
         <TabItem Header="Home">
-            <StackPanel>
-                <Label>
-                    Created by @gitmylo
-                </Label>
-            </StackPanel>
+            <ScrollViewer>
+                <StackPanel>
+                    <Label>
+                        Created by @gitmylo
+                    </Label>
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Scan">
             <TabControl TabStripPlacement="Left">
                 <TabItem Header="New">
                     <ScrollViewer>
                         <StackPanel>
+                            <Label Foreground="red">You MUST have nmap installed in order to scan in msploit</Label>
                             <Grid ColumnDefinitions="1*,3*" RowDefinitions="*,*">
                                 <Label>Type of scan:</Label>
                                 <ComboBox Grid.Column="0" Grid.Row="1" Items="{Binding Scan.scanTypes}" SelectedItem="{Binding Scan.SelectedScanType, Mode=TwoWay}">
@@ -185,6 +188,37 @@
                 <NumericUpDown Minimum="1" Maximum="65535" Value="{Binding ReverseShell.Port, Mode=TwoWay}"></NumericUpDown>
                 <Button Command="{Binding ReverseShell.openShell}" CommandParameter="{Binding ReverseShell.Port}">Create Connection</Button>
             </StackPanel>
+        </TabItem>
+        <TabItem Header="Crack">
+            <TabControl TabStripPlacement="Left">
+                <TabItem Header="Http">
+                    <StackPanel>
+                        <Label Foreground="Red">Very basic, Only supports Http/Https POST requests at the moment</Label>
+                        <Label>Url</Label>
+                        <TextBox IsEnabled="{Binding !Cracker.Running}" Text="{Binding Cracker.Url}"/>
+                        <Label>POST parameters (put *PASS* including stars at the password parameter)</Label>
+                        <TextBox IsEnabled="{Binding !Cracker.Running}" Text="{Binding Cracker.Post}"/>
+                        <Label>Failed attempt check, seperated by |</Label>
+                        <TextBox IsEnabled="{Binding !Cracker.Running}" Text="{Binding Cracker.FailedString}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Password file:</Label>
+                            <Button IsEnabled="{Binding !Cracker.Running}" Command="{Binding Cracker.SelectWordList}" Content="{Binding Cracker.PasswordFile}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding Cracker.Start}" IsEnabled="{Binding !Cracker.Running}">Start</Button>
+                            <Button Command="{Binding Cracker.Stop}" IsEnabled="{Binding Cracker.Running}">Stop</Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Trying password: </Label>
+                            <Label Content="{Binding Cracker.CurrentPass}"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label>Password: </Label>
+                            <Label Content="{Binding Cracker.SuccessPass}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
         </TabItem>
         <TabItem Header="Exploit-DB">
             <TabControl TabStripPlacement="Left">

@@ -79,9 +79,16 @@ namespace Msploit_X.Models
 
         public void openFileDialog()
         {
-            Task<string[]> fileDialog = new OpenFileDialog().ShowAsync(MainWindow.instance);
-            fileDialog.Wait();
-            SelectedFile = fileDialog.Result[0];
+            try
+            {
+                Task<string[]> fileDialog = new OpenFileDialog().ShowAsync(MainWindow.instance);
+                fileDialog.Wait();
+                SelectedFile = fileDialog.Result[0];
+            }
+            catch (Exception e)
+            {
+            }
+            
         }
 
         public void start()
@@ -143,7 +150,7 @@ namespace Msploit_X.Models
                     case 0://WEB
                         HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
                         request.Timeout = 500;
-                        request.Method = "HEAD";
+                        request.Method = "GET";
                         HttpWebResponse response = request.GetResponse() as HttpWebResponse;
                         var statusCode = response.StatusCode;
                         response.Close();

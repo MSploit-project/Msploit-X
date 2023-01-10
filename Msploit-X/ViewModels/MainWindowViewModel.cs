@@ -30,6 +30,8 @@ namespace Msploit_X.ViewModels
 
         private WebServer webServer = new WebServer();
 
+        private Cracker cracker = new Cracker();
+
         public GHDB Ghdb
         {
             get => ghdb;
@@ -70,6 +72,12 @@ namespace Msploit_X.ViewModels
         {
             get => webServer;
             set => this.RaiseAndSetIfChanged(ref webServer, value);
+        }
+
+        public Cracker Cracker
+        {
+            get => cracker;
+            set => this.RaiseAndSetIfChanged(ref cracker, value);
         }
 
         public void open_link(string link)
