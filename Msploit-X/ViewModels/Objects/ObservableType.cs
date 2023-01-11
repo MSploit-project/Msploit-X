@@ -12,7 +12,7 @@ namespace Msploit_X.ViewModels.Objects
         }
         public ObservableType(T value)
         {
-            this.Value = value;
+            Value = value;
         }
 
         public override string ToString()

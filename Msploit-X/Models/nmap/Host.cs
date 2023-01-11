@@ -88,7 +88,7 @@ namespace Msploit_X.Models.nmap
 
         public string asText
         {
-            get => $"{type} - {portNum} - {state} - {service} - {serviceProduct} - {serviceVersion}";
+            get => $"{type} - {portNum} - {state} \n{service} - {serviceProduct} - {serviceVersion}";
         }
     }
 }

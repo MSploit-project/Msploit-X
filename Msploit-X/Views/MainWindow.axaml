@@ -12,19 +12,22 @@
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-    
-    <TabControl >
-        <TabItem Header="Home">
-            <ScrollViewer>
-                <StackPanel>
-                    <Label>
-                        Created by @gitmylo
-                    </Label>
-                </StackPanel>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Scan">
-            <TabControl TabStripPlacement="Left">
+     
+    <NavigationView Header="MSploit-X" Icon="/Assets/logo.png">
+        <NavigationViewItem Icon="/Assets/TabIcons/Home.png" Title="Home" Header="Home">
+            <NavigationViewItem.Content>
+                <ScrollViewer>
+                    <StackPanel>
+                        <Label>
+                            Created by @gitmylo
+                        </Label>
+                    </StackPanel>
+                </ScrollViewer>
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+        <NavigationViewItem Icon="/Assets/TabIcons/Scan.png" Title="Scan" Header="Scan">
+            <NavigationViewItem.Content>
+                <TabControl>
                 <TabItem Header="New">
                     <ScrollViewer>
                         <StackPanel>
@@ -66,7 +69,7 @@
                     </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Results">
-                    <Grid ColumnDefinitions="1*,1*,5*">
+                    <Grid ColumnDefinitions="1*,1*,2*,3*">
                         <ListBox SelectedItem="{Binding Scan.SelectedResult}" Items="{Binding Scan.Results}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -104,54 +107,61 @@
                                 </ListBox>
                             </StackPanel>
                         </ScrollViewer>
+                        <TextBox Grid.Column="3" Text="{Binding Scan.SelectedResult.OutputText}"/>
                     </Grid>
                 </TabItem>
             </TabControl>
-        </TabItem>
-        <TabItem Header="Fuzz">
-            <TabControl TabStripPlacement="Left">
-                <TabItem Header="Fuzz">
-                    <StackPanel>
-                        <Label>Target:</Label>
-                        <TextBox Text="{Binding Fuzzer.Target, Mode=TwoWay}"/>
-                        <Label>WordList:</Label>
-                        <Button Content="{Binding Fuzzer.SelectedFile, Mode=OneWay}" Command="{Binding Fuzzer.openFileDialog}"></Button>
-                        <Label>Mode (0 for web, 1 for ping):</Label>
-                        <Label Content="{Binding Fuzzer.Mode}"/>
-                        <Slider IsSnapToTickEnabled="True" TickFrequency="1" Minimum="0" Maximum="1" Value="{Binding Fuzzer.Mode, Mode=TwoWay}"/>
-                        <StackPanel Orientation="Horizontal">
-                            <Button IsEnabled="{Binding !Fuzzer.Running}" Command="{Binding Fuzzer.start}">Start</Button>
-                            <Button IsEnabled="{Binding Fuzzer.Running}" Command="{Binding Fuzzer.stop}">Stop</Button>
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+        <NavigationViewItem Icon="/Assets/TabIcons/Fuzz.png" Title="Fuzz" Header="Fuzz">
+            <NavigationViewItem.Content>
+                <TabControl>
+                    <TabItem Header="Fuzz">
+                        <StackPanel>
+                            <Label>Target:</Label>
+                            <TextBox Text="{Binding Fuzzer.Target, Mode=TwoWay}"/>
+                            <Label>WordList:</Label>
+                            <Button Content="{Binding Fuzzer.SelectedFile, Mode=OneWay}" Command="{Binding Fuzzer.openFileDialog}"></Button>
+                            <Label>Mode (0 for web, 1 for ping):</Label>
+                            <Label Content="{Binding Fuzzer.Mode}"/>
+                            <Slider IsSnapToTickEnabled="True" TickFrequency="1" Minimum="0" Maximum="1" Value="{Binding Fuzzer.Mode, Mode=TwoWay}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button IsEnabled="{Binding !Fuzzer.Running}" Command="{Binding Fuzzer.start}">Start</Button>
+                                <Button IsEnabled="{Binding Fuzzer.Running}" Command="{Binding Fuzzer.stop}">Stop</Button>
+                            </StackPanel>
+                            <ProgressBar Height="10" Minimum="0" Maximum="{Binding Fuzzer.Total}" Value="{Binding Fuzzer.Progress}"/>
                         </StackPanel>
-                        <ProgressBar Height="10" Minimum="0" Maximum="{Binding Fuzzer.Total}" Value="{Binding Fuzzer.Progress}"/>
-                    </StackPanel>
-                </TabItem>
-                <TabItem Header="Results">
-                    <ListBox Background="Transparent" Items="{Binding Fuzzer.Results}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <ListBoxItem Content="{Binding Url}">
-                                </ListBoxItem>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </TabItem>
-            </TabControl>
-        </TabItem>
-        <TabItem IsSelected="{Binding Exploits.IsCurrentTab, Mode=TwoWay}" Header="Exploit">
-            <Grid ColumnDefinitions="*,*">
-                <TreeView Items="{Binding Exploits.Items}" SelectedItem="{Binding Exploits.SelectedItem, Mode=TwoWay}">
-                    <TreeView.ItemTemplate>
-                        <TreeDataTemplate ItemsSource="{Binding SubFilesAndFolders}">
-                            <TextBlock Text="{Binding strNodeText}"/>
-                        </TreeDataTemplate>
-                    </TreeView.ItemTemplate>
-                </TreeView>
-                <TextBox FontFamily="Consolas" IsReadOnly="True" Text="{Binding Exploits.ExploitText}" Grid.Column="1" AcceptsReturn="True"></TextBox>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Web server">
-            <TabControl TabStripPlacement="Left">
+                    </TabItem>
+                    <TabItem Header="Results">
+                        <ListBox Background="Transparent" Items="{Binding Fuzzer.Results}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBoxItem Content="{Binding Url}">
+                                    </ListBoxItem>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </TabItem>
+                </TabControl>
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+        <NavigationViewItem Icon="/Assets/TabIcons/Exploit.png" Title="Exploit" Header="Exploit">
+            <NavigationViewItem.Content>
+                <Grid ColumnDefinitions="*,*">
+                    <TreeView Items="{Binding Exploits.Items}" SelectedItem="{Binding Exploits.SelectedItem, Mode=TwoWay}">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding SubFilesAndFolders}">
+                                <TextBlock Text="{Binding strNodeText}"/>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                    <TextBox FontFamily="Consolas" IsReadOnly="True" Text="{Binding Exploits.ExploitText}" Grid.Column="1" AcceptsReturn="True"></TextBox>
+                </Grid>
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+        <NavigationViewItem Icon="/Assets/TabIcons/Webserver.png" Title="Web server" Header="Web server">
+            <NavigationViewItem.Content>
+                <TabControl>
                 <TabItem Header="Server">
                     <StackPanel>
                         <Label>Port:</Label>
@@ -190,15 +200,19 @@
                     <TextBox AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Text="{Binding WebServer.ConsoleLog}"/>
                 </TabItem>
             </TabControl>
-        </TabItem>
-        <TabItem Header="Connections">
-            <StackPanel>
-                <NumericUpDown Minimum="1" Maximum="65535" Value="{Binding ReverseShell.Port, Mode=TwoWay}"></NumericUpDown>
-                <Button Command="{Binding ReverseShell.openShell}" CommandParameter="{Binding ReverseShell.Port}">Create Connection</Button>
-            </StackPanel>
-        </TabItem>
-        <TabItem Header="Crack">
-            <TabControl TabStripPlacement="Left">
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+        <NavigationViewItem Icon="/Assets/TabIcons/Connections.png" Title="Connections" Header="Connections">
+            <NavigationViewItem.Content>
+                <StackPanel>
+                    <NumericUpDown Minimum="1" Maximum="65535" Value="{Binding ReverseShell.Port, Mode=TwoWay}"></NumericUpDown>
+                    <Button Command="{Binding ReverseShell.openShell}" CommandParameter="{Binding ReverseShell.Port}">Create Connection</Button>
+                </StackPanel>
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+        <NavigationViewItem Icon="/Assets/TabIcons/Cracker.png" Title="Crack" Header="Crack">
+            <NavigationViewItem.Content>
+                <TabControl>
                 <TabItem Header="Http">
                     <StackPanel>
                         <Label Foreground="Red">Very basic, Only supports Http/Https POST requests at the moment</Label>
@@ -227,9 +241,57 @@
                     </StackPanel>
                 </TabItem>
             </TabControl>
-        </TabItem>
-        <TabItem Header="Exploit-DB">
-            <TabControl TabStripPlacement="Left">
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+        <NavigationViewItem Icon="/Assets/TabIcons/Lfi.png" Title="Local file inclusion, remote code execution and more" Header="LFI,RCE,etc">
+            <NavigationViewItem.Content>
+                <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="100*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox SelectedItem="{Binding EnDeCoder.CurrentMode, Mode=TwoWay}" Items="{Binding EnDeCoder.AllModes}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                <TextBlock TextWrapping="WrapWithOverflow" FontSize="12"  Grid.Row="0" Grid.Column="1" Text="{Binding EnDeCoder.CurrentMode.Description}"/>
+        
+                <TextBox SelectionStart="{Binding EnDeCoder.inputSelectionStart, Mode=TwoWay}" 
+                         SelectionEnd="{Binding EnDeCoder.inputSelectionEnd, Mode=TwoWay}" 
+                         AcceptsReturn="True" TextWrapping="Wrap" 
+                         IsFocused="{Binding EnDeCoder.InputFocussed, Mode=OneWayToSource}" 
+                         Grid.Row="1" Grid.Column="0" 
+                         Text="{Binding EnDeCoder.InputText, Mode=TwoWay}">
+                    <TextBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Insert">
+                                <MenuItem Header="Php">
+                                    <MenuItem Header="Opening tag" CommandParameter="&lt;?php |6" Command="{Binding EnDeCoder.Insert}" />
+                                    <MenuItem Header="Shell Command" CommandParameter="system($_REQUEST['cmd']);|21" Command="{Binding EnDeCoder.Insert}" />
+                                </MenuItem>
+                                <MenuItem Header="Javascript">
+                                    <MenuItem Header="Tags" CommandParameter="&lt;script&gt;&lt;/script&gt;|8" Command="{Binding EnDeCoder.Insert}"/>
+                                    <MenuItem Header="Alert" CommandParameter="alert(1)|8" Command="{Binding EnDeCoder.Insert}"/>
+                                </MenuItem>
+                            </MenuItem>
+                        </ContextMenu>
+                    </TextBox.ContextMenu>
+                </TextBox>
+                <TextBox AcceptsReturn="True" TextWrapping="Wrap" IsFocused="{Binding EnDeCoder.OutputFocussed, Mode=OneWayToSource}" Grid.Row="1" Grid.Column="1" Text="{Binding EnDeCoder.OutputText, Mode=TwoWay}"/>
+            </Grid>
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+        <NavigationViewItem Icon="/Assets/TabIcons/EDB.png" Title="Exploit-DB" Header="Exploit-DB">
+            <NavigationViewItem.Content>
+                <TabControl>
                 <TabItem Header="GHDB">
                     <Grid RowDefinitions="1*,10*">
                         <TextBox Grid.Row="0" Text="{Binding Ghdb.Search, Mode=TwoWay}"></TextBox>
@@ -279,9 +341,11 @@
                     </StackPanel>
                 </TabItem>
             </TabControl>
-        </TabItem>
-        <TabItem Header="Tools">
-            <TabControl TabStripPlacement="Left">
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+        <NavigationViewItem Icon="/Assets/TabIcons/Tools.png" Title="Tools" Header="Tools">
+            <NavigationViewItem.Content>
+                <TabControl>
                 <TabItem Header="Tools">
                     <ListBox>
                         <Button Command="{Binding open_link}" CommandParameter="https://docs.metasploit.com/docs/using-metasploit/getting-started/nightly-installers.html">Metasploit framework</Button>
@@ -310,7 +374,8 @@
                     </ListBox>
                 </TabItem>
             </TabControl>
-        </TabItem>
-    </TabControl>
+            </NavigationViewItem.Content>
+        </NavigationViewItem>
+    </NavigationView>
     
 </Window>

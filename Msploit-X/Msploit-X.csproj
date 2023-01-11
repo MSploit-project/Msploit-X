@@ -6,11 +6,14 @@
         <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
+        <Folder Include="Assets\TabIcons" />
         <Folder Include="Models\" />
         <AvaloniaResource Include="Assets\**" />
         <None Remove=".gitignore" />
     </ItemGroup>
     <ItemGroup>
+        <PackageReference Include="Aura.UI" Version="0.1.4.2" />
+        <PackageReference Include="Aura.UI.FluentTheme" Version="0.1.4.2" />
         <PackageReference Include="Avalonia" Version="0.10.10" />
         <PackageReference Include="Avalonia.Desktop" Version="0.10.10" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->

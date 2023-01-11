@@ -31,6 +31,8 @@ namespace Msploit_X.ViewModels
         private WebServer webServer = new WebServer();
 
         private Cracker cracker = new Cracker();
+        
+        private EnDeCoder enDeCoder = new EnDeCoder();
 
         public GHDB Ghdb
         {
@@ -78,6 +80,12 @@ namespace Msploit_X.ViewModels
         {
             get => cracker;
             set => this.RaiseAndSetIfChanged(ref cracker, value);
+        }
+
+        public EnDeCoder EnDeCoder
+        {
+            get => enDeCoder; 
+            set => this.RaiseAndSetIfChanged(ref enDeCoder, value);
         }
 
         public void open_link(string link)

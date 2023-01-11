@@ -88,8 +88,8 @@ namespace Msploit_X.Models.nmap
                              $" {selectedScript.Value.flag}" +
                              $" {customArgs}";
             
-            string dir = $"{Directory.GetCurrentDirectory()}\\scans\\{ip}.xml";
-            command = command + $" -oX \"{dir}\"";
+            string dir = $"{Directory.GetCurrentDirectory()}\\scans\\{ip}";
+            command = command + $" -oX \"{dir}.xml\" -oN \"{dir}.txt\"";
             CanScan = false;
             new Thread(() =>
             {
