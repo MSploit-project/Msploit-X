@@ -4,12 +4,15 @@ using System.Diagnostics;
 using System.Text;
 using Msploit_X.Models;
 using Msploit_X.Models.nmap;
+using Msploit_X.ViewModels.Objects;
 using ReactiveUI;
 
 namespace Msploit_X.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        public bool False => false;
+
         public static MainWindowViewModel instance;
 
         public MainWindowViewModel()

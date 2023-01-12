@@ -14,11 +14,14 @@
     <ItemGroup>
         <PackageReference Include="Aura.UI" Version="0.1.4.2" />
         <PackageReference Include="Aura.UI.FluentTheme" Version="0.1.4.2" />
-        <PackageReference Include="Avalonia" Version="0.10.10" />
-        <PackageReference Include="Avalonia.Desktop" Version="0.10.10" />
+        <PackageReference Include="Avalonia" Version="0.10.12" />
+        <PackageReference Include="Avalonia.AvaloniaEdit" Version="0.10.12.2" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.10.12" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.10" />
-        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.10" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.12" />
+        <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.12" />
+        <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.12.2" />
+        <PackageReference Include="AvaloniaEdit.TextMate" Version="0.10.12.2" />
         <PackageReference Include="AvalonStudio.Shell" Version="0.9.9" />
         <PackageReference Include="CsvHelper" Version="30.0.1" />
         <PackageReference Include="NmapXmlParser" Version="1.0.0" />

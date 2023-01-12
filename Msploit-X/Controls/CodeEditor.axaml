@@ -1,0 +1,27 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:behaviors="clr-namespace:Msploit_X.Behaviors"
+             xmlns:ae="https://github.com/avaloniaui/avaloniaedit"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Msploit_X.Controls.CodeEditor">
+	<Grid>
+		<ae:TextEditor Name="TextCode"
+		               Margin="0"
+		               Background="Black"
+		               Foreground="White"
+		               SyntaxHighlighting="C#"
+		               HorizontalScrollBarVisibility="Auto"
+		               VerticalScrollBarVisibility="Auto"
+		               FontFamily="{DynamicResource CodeFontFamily}" 
+		               FontWeight="Normal" 
+		               FontSize="14"
+		               WordWrap="False">
+			<i:Interaction.Behaviors>
+				<behaviors:DocumentTextBindingBehavior Text="{Binding code}"/>
+			</i:Interaction.Behaviors>
+		</ae:TextEditor>
+	</Grid>
+</UserControl>
