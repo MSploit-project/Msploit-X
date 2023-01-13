@@ -8,14 +8,16 @@
         x:Class="Msploit_X.Views.MainWindow"
         Icon="/Assets/logo.ico"
         Title="MSploit-X"
-        Closing="Window_OnClosing">
+        Closing="Window_OnClosing"
+        
+        xmlns:ae="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-     
-    <AuraTabView ReorderableTabs="False" TabStripPlacement="Left" AdderButtonIsVisible="False">
-        <AuraTabItem IsClosable="{Binding False}" Icon="/Assets/TabIcons/Home.png" Header="Home">
+    
+    <TabControl TabStripPlacement="Left">
+        <TabItem Header="Home">
             <ScrollViewer>
                 <StackPanel>
                     <Label>
@@ -23,10 +25,10 @@
                     </Label>
                 </StackPanel>
             </ScrollViewer>
-        </AuraTabItem>
-        <AuraTabItem IsClosable="{Binding False}" Icon="/Assets/TabIcons/Scan.png" Header="Scan">
-            <AuraTabView AdderButtonIsVisible="False">
-                <AuraTabItem IsClosable="{Binding False}" Header="New">
+        </TabItem>
+        <TabItem Header="Scan">
+            <TabControl>
+                <TabItem Header="New">
                     <ScrollViewer>
                         <StackPanel>
                             <Label Foreground="red">You MUST have nmap installed in order to scan in msploit</Label>
@@ -65,8 +67,8 @@
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
-                </AuraTabItem>
-                <AuraTabItem IsClosable="{Binding False}" Header="Results">
+                </TabItem>
+                <TabItem  Header="Results">
                     <Grid ColumnDefinitions="1*,1*,2*,3*">
                         <ListBox SelectedItem="{Binding Scan.SelectedResult}" Items="{Binding Scan.Results}">
                             <ListBox.ItemTemplate>
@@ -107,12 +109,12 @@
                         </ScrollViewer>
                         <TextBox IsReadOnly="True" Grid.Column="3" Text="{Binding Scan.SelectedResult.OutputText}"/>
                     </Grid>
-                </AuraTabItem>
-            </AuraTabView>
-        </AuraTabItem>
-        <AuraTabItem IsClosable="{Binding False}" Icon="/Assets/TabIcons/Fuzz.png" Header="Fuzz">
-            <AuraTabView AdderButtonIsVisible="False">
-                <AuraTabItem IsClosable="{Binding False}" Header="Fuzz">
+                </TabItem>
+            </TabControl>
+        </TabItem>
+        <TabItem Header="Fuzz">
+            <TabControl>
+                <TabItem  Header="Fuzz">
                     <StackPanel>
                         <Label>Target:</Label>
                         <TextBox Text="{Binding Fuzzer.Target, Mode=TwoWay}"/>
@@ -127,8 +129,8 @@
                         </StackPanel>
                         <ProgressBar Height="10" Minimum="0" Maximum="{Binding Fuzzer.Total}" Value="{Binding Fuzzer.Progress}"/>
                     </StackPanel>
-                </AuraTabItem>
-                <AuraTabItem IsClosable="{Binding False}" Header="Results">
+                </TabItem>
+                <TabItem  Header="Results">
                     <ListBox Background="Transparent" Items="{Binding Fuzzer.Results}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -137,10 +139,10 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </AuraTabItem>
-            </AuraTabView>
-        </AuraTabItem>
-        <AuraTabItem IsSelected="{Binding Exploits.IsCurrentTab, Mode=TwoWay}" IsClosable="{Binding False}" Icon="/Assets/TabIcons/Exploit.png" Header="Exploit">
+                </TabItem>
+            </TabControl>
+        </TabItem>
+        <TabItem IsSelected="{Binding Exploits.IsCurrentTab, Mode=TwoWay}" Header="Exploit">
             <Grid ColumnDefinitions="*,*">
                 <TreeView Items="{Binding Exploits.Items}" SelectedItem="{Binding Exploits.SelectedItem, Mode=TwoWay}">
                     <TreeView.ItemTemplate>
@@ -151,10 +153,10 @@
                 </TreeView>
                 <TextBox FontFamily="Consolas" IsReadOnly="True" Text="{Binding Exploits.ExploitText}" Grid.Column="1" AcceptsReturn="True"></TextBox>
             </Grid>
-        </AuraTabItem>
-        <AuraTabItem IsClosable="{Binding False}" Icon="/Assets/TabIcons/Webserver.png" Header="Web server">
-            <AuraTabView AdderButtonIsVisible="False">
-                <AuraTabItem IsClosable="{Binding False}" Header="Server">
+        </TabItem>
+        <TabItem Header="Web server">
+            <TabControl >
+                <TabItem  Header="Server">
                     <StackPanel>
                         <Label>Port:</Label>
                         <NumericUpDown Minimum="1" Maximum="65535" Value="{Binding WebServer.Port, Mode=TwoWay}"/>
@@ -163,8 +165,8 @@
                             <Button Command="{Binding WebServer.stop}" IsEnabled="{Binding WebServer.Running}">Stop</Button>
                         </StackPanel>
                     </StackPanel>
-                </AuraTabItem>
-                <AuraTabItem IsClosable="{Binding False}" Header="Files">
+                </TabItem>
+                <TabItem  Header="Files">
                     <Grid ColumnDefinitions="*,*">
                         <ListBox SelectedItem="{Binding WebServer.SelectedPage, Mode=TwoWay}" Items="{Binding WebServer.Pages}">
                             <ListBox.ItemTemplate>
@@ -184,25 +186,26 @@
                                     <TextBox Text="{Binding WebServer.SelectedPage.ContentType, Mode=TwoWay}"></TextBox>
                                 </StackPanel>
                                 <TextBox Grid.Row="1" Height="200" AcceptsReturn="True" Text="{Binding WebServer.SelectedPage.dataString, Mode=TwoWay}"/>
-                                <!--<code:CodeEditor Grid.Row="1" Height="200"></code:CodeEditor>-->
+                                <!--<code:CodeEditor Grid.Row="1" Height="200" Content="{Binding WebServer.SelectedPage.dataString}"></code:CodeEditor>-->
+                                
                             </Grid>
                         </StackPanel>
                     </Grid>
-                </AuraTabItem>
-                <AuraTabItem IsClosable="{Binding False}" Header="Console">
+                </TabItem>
+                <TabItem  Header="Console">
                     <TextBox AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" Text="{Binding WebServer.ConsoleLog}"/>
-                </AuraTabItem>
-            </AuraTabView>
-        </AuraTabItem>
-        <AuraTabItem IsClosable="{Binding False}" Icon="/Assets/TabIcons/Connections.png" Header="Connections">
+                </TabItem>
+            </TabControl>
+        </TabItem>
+        <TabItem Header="Connections">
             <StackPanel>
                 <NumericUpDown Minimum="1" Maximum="65535" Value="{Binding ReverseShell.Port, Mode=TwoWay}"></NumericUpDown>
                 <Button Command="{Binding ReverseShell.openShell}" CommandParameter="{Binding ReverseShell.Port}">Create Connection</Button>
             </StackPanel>
-        </AuraTabItem>
-        <AuraTabItem IsClosable="{Binding False}" Icon="/Assets/TabIcons/Cracker.png" Header="Crack">
-            <AuraTabView AdderButtonIsVisible="False">
-                <AuraTabItem IsClosable="{Binding False}" Header="Http">
+        </TabItem>
+        <TabItem Header="Crack">
+            <TabControl>
+                <TabItem  Header="Http">
                     <StackPanel>
                         <Label Foreground="Red">Very basic, Only supports Http/Https POST requests at the moment</Label>
                         <Label>Url</Label>
@@ -211,10 +214,8 @@
                         <TextBox IsEnabled="{Binding !Cracker.Running}" Text="{Binding Cracker.Post}"/>
                         <Label>Failed attempt check, seperated by |</Label>
                         <TextBox IsEnabled="{Binding !Cracker.Running}" Text="{Binding Cracker.FailedString}"/>
-                        <StackPanel Orientation="Horizontal">
-                            <Label>Password file:</Label>
-                            <Button IsEnabled="{Binding !Cracker.Running}" Command="{Binding Cracker.SelectWordList}" Content="{Binding Cracker.PasswordFile}"/>
-                        </StackPanel>
+                        <Label>Password file:</Label>
+                        <Button IsEnabled="{Binding !Cracker.Running}" Command="{Binding Cracker.SelectWordList}" Content="{Binding Cracker.PasswordFile}"/>
                         <StackPanel Orientation="Horizontal">
                             <Button Command="{Binding Cracker.Start}" IsEnabled="{Binding !Cracker.Running}">Start</Button>
                             <Button Command="{Binding Cracker.Stop}" IsEnabled="{Binding Cracker.Running}">Stop</Button>
@@ -228,10 +229,10 @@
                             <Label Content="{Binding Cracker.SuccessPass}"/>
                         </StackPanel>
                     </StackPanel>
-                </AuraTabItem>
-            </AuraTabView>
-        </AuraTabItem>
-        <AuraTabItem IsClosable="{Binding False}" Icon="/Assets/TabIcons/Lfi.png" Header="LFI,RCE,etc">
+                </TabItem>
+            </TabControl>
+        </TabItem>
+        <TabItem Header="LFI,RCE,etc">
             <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
@@ -274,35 +275,35 @@
                 </TextBox>
                 <TextBox AcceptsReturn="True" TextWrapping="Wrap" IsFocused="{Binding EnDeCoder.OutputFocussed, Mode=OneWayToSource}" Grid.Row="1" Grid.Column="1" Text="{Binding EnDeCoder.OutputText, Mode=TwoWay}"/>
             </Grid>
-        </AuraTabItem>
-        <AuraTabItem IsClosable="{Binding False}" Icon="/Assets/TabIcons/EDB.png" Header="Exploit-DB">
-            <AuraTabView AdderButtonIsVisible="False">
-                <AuraTabItem IsClosable="{Binding False}" Header="GHDB">
+        </TabItem>
+        <TabItem Header="Exploit-DB">
+            <TabControl>
+                <TabItem Header="GHDB">
                     <Grid RowDefinitions="1*,10*">
                         <TextBox Grid.Row="0" Text="{Binding Ghdb.Search, Mode=TwoWay}"></TextBox>
                         <ListBox Grid.Row="1" Items="{Binding Ghdb.Items}" Background="Transparent">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <ListBoxItem>
-                                        <Button Command="{Binding openLink}" Width="10000">
+                                    <Panel>
+                                        <Button HorizontalContentAlignment="Left" Command="{Binding openLink}" Width="10000">
                                             <StackPanel Orientation="Vertical">
                                                 <Label Content="{Binding ShortDescription}"></Label>
                                                 <Label FontStyle="Italic" Content="{Binding TextualDescription}"></Label>
                                             </StackPanel>
                                         </Button>
-                                    </ListBoxItem>
+                                    </Panel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </Grid>
-                </AuraTabItem>
-                <AuraTabItem IsClosable="{Binding False}" Header="Exploits">
+                </TabItem>
+                <TabItem  Header="Exploits">
                     <Grid RowDefinitions="1*,10*">
                         <TextBox Grid.Row="0" Text="{Binding ExploitsSearch.Search}"></TextBox>
                         <ListBox Grid.Row="1" Items="{Binding ExploitsSearch.Items}" Background="Transparent">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <ListBoxItem>
+                                    <Panel>
                                         <StackPanel Orientation="Vertical">
                                             <StackPanel Orientation="Horizontal">
                                                 <Button Command="{Binding openLink}">Open link</Button>
@@ -312,38 +313,39 @@
                                             <Label Content="{Binding Platform}"></Label>
                                             <Label Content="{Binding File}"></Label>
                                         </StackPanel>
-                                    </ListBoxItem>
+                                    </Panel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </Grid>
-                </AuraTabItem>
-                <AuraTabItem Header="Info">
+                </TabItem>
+                <TabItem Header="Info">
                     <StackPanel>
                         <Button Click="open_link_EDB">Download exploit-db</Button>
                         <Button Click="open_link_DP">Default passwords</Button>
                         <Button Command="{Binding open_link}" CommandParameter="https://www.rapid7.com/db/">Rapid7 db</Button>
                     </StackPanel>
-                </AuraTabItem>
-            </AuraTabView>
-        </AuraTabItem>
-        <AuraTabItem IsClosable="{Binding False}" Icon="/Assets/TabIcons/Tools.png" Header="Tools">
-            <AuraTabView AdderButtonIsVisible="False">
-                <AuraTabItem IsClosable="{Binding False}" Header="Tools">
+                </TabItem>
+            </TabControl>
+        </TabItem>
+        <TabItem Header="Tools">
+            <TabControl>
+                <TabItem  Header="Tools">
                     <ListBox>
                         <Button Command="{Binding open_link}" CommandParameter="https://docs.metasploit.com/docs/using-metasploit/getting-started/nightly-installers.html">Metasploit framework</Button>
                         <Button Command="{Binding open_link}" CommandParameter="https://github.com/calebstewart/pwncat">Pwncat reverse shell handler</Button>
                         <Button Command="{Binding open_link}" CommandParameter="https://www.tenable.com/downloads/nessus">Nessus scanner (essential is free)</Button>
                         <Button Command="{Binding open_link}" CommandParameter="https://nmap.org/download.html">Nmap</Button>
+                        <Button Command="{Binding open_link}" CommandParameter="https://www.telerik.com/fiddler/fiddler-classic">Fiddler</Button>
                     </ListBox>
-                </AuraTabItem>
-                <AuraTabItem IsClosable="{Binding False}" Header="Dns and search">
+                </TabItem>
+                <TabItem  Header="Dns and search">
                     <ListBox>
                         <Button Command="{Binding open_link}" CommandParameter="https://dnsdumpster.com/">DnsDumpster</Button>
                         <Button Command="{Binding open_link}" CommandParameter="https://www.shodan.io/">Shodan</Button>
                     </ListBox>
-                </AuraTabItem>
-                <AuraTabItem IsClosable="{Binding False}" Header="Other">
+                </TabItem>
+                <TabItem  Header="Other">
                     <ListBox>
                         <Label>Osint</Label>
                         <Button Command="{Binding open_link}" CommandParameter="https://osintframework.com/">Osint Framework</Button>
@@ -355,8 +357,8 @@
                         <Label>Cracking</Label>
                         <Button Command="{Binding open_link}" CommandParameter="https://crackstation.net/">Crackstation</Button>
                     </ListBox>
-                </AuraTabItem>
-            </AuraTabView>
-        </AuraTabItem>
-    </AuraTabView>
+                </TabItem>
+            </TabControl>
+        </TabItem>
+    </TabControl>
 </Window>

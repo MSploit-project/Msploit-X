@@ -1,12 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
 using AvaloniaEdit;
 using AvaloniaEdit.Indentation.CSharp;
-using Msploit_X.Behaviors;
 
 namespace Msploit_X.Controls
 {
@@ -17,7 +13,7 @@ namespace Msploit_X.Controls
         public CodeEditor()
         {
             InitializeComponent();
-            _textEditor = this.FindControl<TextEditor>("TextCode");
+            _textEditor = this.FindControl<TextEditor>("textCode");
             _textEditor.ShowLineNumbers = true;
             _textEditor.TextArea.IndentationStrategy = new CSharpIndentationStrategy();
         }

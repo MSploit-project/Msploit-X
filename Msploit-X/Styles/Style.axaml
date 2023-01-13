@@ -1,0 +1,64 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<!-- Add Controls for Previewer Here -->
+			<TabControl TabStripPlacement="Left">
+				<TabItem Header="Basic controls">
+					<Grid Width="400" Height="400" ColumnDefinitions="*, *" RowDefinitions="*, *">
+						<StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<Button>Regular</Button>
+								<Button IsEnabled="False">Disabled</Button>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<Button IsCancel="True">Cancel</Button>
+								<Button IsDefault="True">Default</Button>
+							</StackPanel>
+						</StackPanel>
+					</Grid>
+				</TabItem>
+				<TabItem Header="More">
+					
+				</TabItem>
+			</TabControl>
+		</Border>
+	</Design.PreviewWith>
+
+	<!-- Add Styles Here -->
+	<!--Buttons-->
+	<Styles>
+		<Style Selector="Button">
+			<Setter Property="Background" Value="#656565"/>
+		</Style>
+		<Style Selector="Button[IsCancel=True]">
+			<Setter Property="Background" Value="#ff0000"/>
+		</Style>
+		<Style Selector="Button[IsDefault=True]">
+			<Setter Property="Background" Value="#4277ff"/>
+		</Style>
+		<Style Selector="Button:pressed">
+			<Setter Property="Background" Value="#000000"/>
+		</Style>
+	</Styles>
+	<!--Tabcontrols-->
+	<Styles>
+		<Style Selector="TabControl">
+			<!--<Setter Property=""></Setter>-->
+		</Style>
+		<Style Selector="TabItem">
+			<Setter Property="Padding" Value="5, 0"/>
+			<Setter Property="FontSize" Value="15"/>
+			<Setter Property="Margin" Value="0"/>
+		</Style>
+		<Style Selector="TabControl[TabStripPlacement=Left] TabItem">
+			<Setter Property="HorizontalAlignment" Value="Right"></Setter>
+		</Style>
+	</Styles>
+	<!--Window-->
+	<Styles>
+		<Style Selector="Window">
+			<Setter Property="Background" Value="black"/>
+		</Style>
+	</Styles>
+</Styles>
