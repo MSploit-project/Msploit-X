@@ -15,11 +15,24 @@
 								<Button IsCancel="True">Cancel</Button>
 								<Button IsDefault="True">Default</Button>
 							</StackPanel>
+							<Label>Label</Label>
+							<Slider/>
+							<TextBox></TextBox>
+							<TextBlock>TextBlock</TextBlock>
+							<ComboBox>
+								<ComboBoxItem>Text</ComboBoxItem>
+								<ComboBoxItem>more text</ComboBoxItem>
+								<ComboBoxItem>somewhat longer piece of text</ComboBoxItem>
+								<ComboBoxItem>even more text</ComboBoxItem>
+							</ComboBox>
 						</StackPanel>
 					</Grid>
 				</TabItem>
 				<TabItem Header="More">
-					
+					<TabControl>
+						<TabItem Header="TabControl"></TabItem>
+						<TabItem Header="Tab2"></TabItem>
+					</TabControl>
 				</TabItem>
 			</TabControl>
 		</Border>
@@ -30,6 +43,7 @@
 	<Styles>
 		<Style Selector="Button">
 			<Setter Property="Background" Value="#656565"/>
+			<Setter Property="CornerRadius" Value="100"/>
 		</Style>
 		<Style Selector="Button[IsCancel=True]">
 			<Setter Property="Background" Value="#ff0000"/>
@@ -37,8 +51,14 @@
 		<Style Selector="Button[IsDefault=True]">
 			<Setter Property="Background" Value="#4277ff"/>
 		</Style>
-		<Style Selector="Button:pressed">
-			<Setter Property="Background" Value="#000000"/>
+		<Style Selector="Button:pressed /template/ ContentPresenter">
+			<Setter Property="Background" Value="#444444"/>
+		</Style>
+		<Style Selector="Button[IsCancel=True]:pressed /template/ ContentPresenter">
+			<Setter Property="Background" Value="#880000"></Setter>
+		</Style>
+		<Style Selector="Button[IsDefault=True]:pressed /template/ ContentPresenter">
+			<Setter Property="Background" Value="#4244bb"></Setter>
 		</Style>
 	</Styles>
 	<!--Tabcontrols-->
@@ -47,18 +67,21 @@
 			<!--<Setter Property=""></Setter>-->
 		</Style>
 		<Style Selector="TabItem">
-			<Setter Property="Padding" Value="5, 0"/>
+			<Setter Property="Padding" Value="5"/>
 			<Setter Property="FontSize" Value="15"/>
 			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Foreground" Value="white"/>
+		</Style>
+		<Style Selector="TabItem[IsSelected=True] /template/ ContentPresenter#PART_ContentPresenter">
+			<Setter Property="Background" Value="#4277ff"></Setter>
 		</Style>
 		<Style Selector="TabControl[TabStripPlacement=Left] TabItem">
-			<Setter Property="HorizontalAlignment" Value="Right"></Setter>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+			<Setter Property="CornerRadius" Value="100 0 0 100"/>
+			<Setter Property="Margin" Value="0 5 0 0"/>
 		</Style>
-	</Styles>
-	<!--Window-->
-	<Styles>
-		<Style Selector="Window">
-			<Setter Property="Background" Value="black"/>
+		<Style Selector="TabControl[TabStripPlacement=Top] TabItem">
+			<Setter Property="CornerRadius" Value="10 10 0 0"/>
 		</Style>
 	</Styles>
 </Styles>

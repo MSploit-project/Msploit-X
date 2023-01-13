@@ -63,7 +63,7 @@
                             <Label>Custom args (for example --open) (may cause crashes):</Label>
                             <TextBox Text="{Binding Scan.CustomArgs}"></TextBox>
                             <StackPanel Orientation="Horizontal">
-                                <Button IsEnabled="{Binding Scan.CanScan}" Command="{Binding Scan.scan}">Scan</Button>
+                                <Button IsDefault="True" IsEnabled="{Binding Scan.CanScan}" Command="{Binding Scan.scan}">Scan</Button>
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
@@ -124,8 +124,8 @@
                         <Label Content="{Binding Fuzzer.Mode}"/>
                         <Slider IsSnapToTickEnabled="True" TickFrequency="1" Minimum="0" Maximum="1" Value="{Binding Fuzzer.Mode, Mode=TwoWay}"/>
                         <StackPanel Orientation="Horizontal">
-                            <Button IsEnabled="{Binding !Fuzzer.Running}" Command="{Binding Fuzzer.start}">Start</Button>
-                            <Button IsEnabled="{Binding Fuzzer.Running}" Command="{Binding Fuzzer.stop}">Stop</Button>
+                            <Button IsDefault="True" IsEnabled="{Binding !Fuzzer.Running}" Command="{Binding Fuzzer.start}">Start</Button>
+                            <Button IsCancel="True" IsEnabled="{Binding Fuzzer.Running}" Command="{Binding Fuzzer.stop}">Stop</Button>
                         </StackPanel>
                         <ProgressBar Height="10" Minimum="0" Maximum="{Binding Fuzzer.Total}" Value="{Binding Fuzzer.Progress}"/>
                     </StackPanel>
@@ -161,8 +161,8 @@
                         <Label>Port:</Label>
                         <NumericUpDown Minimum="1" Maximum="65535" Value="{Binding WebServer.Port, Mode=TwoWay}"/>
                         <StackPanel Orientation="Horizontal">
-                            <Button Command="{Binding WebServer.start}" IsEnabled="{Binding !WebServer.Running}">Start</Button>
-                            <Button Command="{Binding WebServer.stop}" IsEnabled="{Binding WebServer.Running}">Stop</Button>
+                            <Button IsDefault="True" Command="{Binding WebServer.start}" IsEnabled="{Binding !WebServer.Running}">Start</Button>
+                            <Button IsCancel="True" Command="{Binding WebServer.stop}" IsEnabled="{Binding WebServer.Running}">Stop</Button>
                         </StackPanel>
                     </StackPanel>
                 </TabItem>
@@ -187,7 +187,6 @@
                                 </StackPanel>
                                 <TextBox Grid.Row="1" Height="200" AcceptsReturn="True" Text="{Binding WebServer.SelectedPage.dataString, Mode=TwoWay}"/>
                                 <!--<code:CodeEditor Grid.Row="1" Height="200" Content="{Binding WebServer.SelectedPage.dataString}"></code:CodeEditor>-->
-                                
                             </Grid>
                         </StackPanel>
                     </Grid>
@@ -217,8 +216,8 @@
                         <Label>Password file:</Label>
                         <Button IsEnabled="{Binding !Cracker.Running}" Command="{Binding Cracker.SelectWordList}" Content="{Binding Cracker.PasswordFile}"/>
                         <StackPanel Orientation="Horizontal">
-                            <Button Command="{Binding Cracker.Start}" IsEnabled="{Binding !Cracker.Running}">Start</Button>
-                            <Button Command="{Binding Cracker.Stop}" IsEnabled="{Binding Cracker.Running}">Stop</Button>
+                            <Button IsDefault="True" Command="{Binding Cracker.Start}" IsEnabled="{Binding !Cracker.Running}">Start</Button>
+                            <Button IsCancel="True" Command="{Binding Cracker.Stop}" IsEnabled="{Binding Cracker.Running}">Stop</Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label>Trying password: </Label>
