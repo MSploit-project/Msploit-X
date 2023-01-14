@@ -43,7 +43,7 @@
 	<Styles>
 		<Style Selector="Button">
 			<Setter Property="Background" Value="#656565"/>
-			<Setter Property="CornerRadius" Value="100"/>
+			<!--<Setter Property="CornerRadius" Value="100"/>-->
 		</Style>
 		<Style Selector="Button[IsCancel=True]">
 			<Setter Property="Background" Value="#ff0000"/>
@@ -74,6 +74,9 @@
 		</Style>
 		<Style Selector="TabItem[IsSelected=True] /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="Background" Value="#4277ff"></Setter>
+		</Style>
+		<Style Selector="TabItem[IsSelected=True] /template/ TabStripItem">
+			<Setter Property="Background" Value="#000000"/>
 		</Style>
 		<Style Selector="TabControl[TabStripPlacement=Left] TabItem">
 			<Setter Property="HorizontalAlignment" Value="Right"/>

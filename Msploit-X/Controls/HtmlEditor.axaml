@@ -3,7 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Msploit_X.Controls.CodeEditor"
+             x:Class="Msploit_X.Controls.HtmlEditor"
+             xmlns:dc="using:Msploit_X.ViewModels"
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ae="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
              xmlns:behaviors="clr-namespace:Msploit_X.Behaviors">
@@ -12,7 +13,7 @@
 		               Margin="0"
 		               Background="Black"
 		               Foreground="White"
-		               SyntaxHighlighting="C#"
+		               SyntaxHighlighting="HTML"
 		               HorizontalScrollBarVisibility="Auto"
 		               VerticalScrollBarVisibility="Auto"
 		               FontFamily="Consolas"
@@ -20,8 +21,9 @@
 		               FontSize="14"
 		               WordWrap="False">
 			<i:Interaction.Behaviors>
-				<behaviors:DocumentTextBindingBehavior Text="{Binding Code, Mode=TwoWay}"/>
+				<behaviors:DocumentTextBindingBehavior Text="{Binding WebServer.SelectedPage.dataString, Mode=TwoWay}"/>
 			</i:Interaction.Behaviors>
 		</ae:TextEditor>
 	</Grid>
 </UserControl>
+

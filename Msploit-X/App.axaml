@@ -8,6 +8,7 @@
 
 	<Application.Styles>
 		<SimpleTheme Mode="Dark"/>
+		<StyleInclude Source="avares://AvaloniaEdit/AvaloniaEdit.xaml"/>
 		<StyleInclude Source="avares://Msploit-X/Styles/Style.axaml"/>
 	</Application.Styles>
 </Application>

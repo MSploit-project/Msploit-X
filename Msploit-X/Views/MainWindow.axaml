@@ -10,7 +10,8 @@
         Title="MSploit-X"
         Closing="Window_OnClosing"
         
-        xmlns:ae="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit">
+        xmlns:ae="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+        xmlns:behaviors="clr-namespace:Msploit_X.Behaviors">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -175,8 +176,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <StackPanel Grid.Column="1">
-                            <Grid RowDefinitions="*,*">
+                            <Grid Grid.Column="1" RowDefinitions="100 *">
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Button Command="{Binding WebServer.removeSelected}">Remove</Button>
@@ -185,10 +185,9 @@
                                     <TextBox Text="{Binding WebServer.SelectedPage.Url, Mode=TwoWay}"></TextBox>
                                     <TextBox Text="{Binding WebServer.SelectedPage.ContentType, Mode=TwoWay}"></TextBox>
                                 </StackPanel>
-                                <TextBox Grid.Row="1" Height="200" AcceptsReturn="True" Text="{Binding WebServer.SelectedPage.dataString, Mode=TwoWay}"/>
-                                <!--<code:CodeEditor Grid.Row="1" Height="200" Content="{Binding WebServer.SelectedPage.dataString}"></code:CodeEditor>-->
+                                <!--<TextBox Grid.Row="1" Height="200" AcceptsReturn="True" Text="{Binding WebServer.SelectedPage.dataString, Mode=TwoWay}"/>-->
+                                <code:HtmlEditor Grid.Row="1"/>
                             </Grid>
-                        </StackPanel>
                     </Grid>
                 </TabItem>
                 <TabItem  Header="Console">
