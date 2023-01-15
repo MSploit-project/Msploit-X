@@ -274,6 +274,18 @@
                 <TextBox AcceptsReturn="True" TextWrapping="Wrap" IsFocused="{Binding EnDeCoder.OutputFocussed, Mode=OneWayToSource}" Grid.Row="1" Grid.Column="1" Text="{Binding EnDeCoder.OutputText, Mode=TwoWay}"/>
             </Grid>
         </TabItem>
+        <TabItem Header="Custom">
+            <Grid RowDefinitions="30 *">
+                <ComboBox Grid.Row="0" Items="{Binding CustomModules.Items}" SelectedItem="{Binding CustomModules.SelectedItem.Value, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}" ToolTip.Tip="{Binding Description}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Grid.Row="1" Content="{Binding CustomModules.SelectedItem.Value.Control}"/>
+            </Grid>
+        </TabItem>
         <TabItem Header="Exploit-DB">
             <TabControl>
                 <TabItem Header="GHDB">

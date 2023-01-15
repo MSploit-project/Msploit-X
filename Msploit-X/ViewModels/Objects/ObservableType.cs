@@ -15,6 +15,11 @@ namespace Msploit_X.ViewModels.Objects
             Value = value;
         }
 
+        public ObservableType()
+        {
+            Value = default;
+        }
+
         public override string ToString()
         {
             return Value.ToString();

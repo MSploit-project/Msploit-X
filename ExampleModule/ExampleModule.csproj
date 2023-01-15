@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Msploit-X\Msploit-X.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Avalonia" Version="11.0.0-preview4" />
+      <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview4" />
+      <PackageReference Include="Avalonia.Diagnostics" Version="11.0.0-preview4" />
+      <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.0-preview4" />
+    </ItemGroup>
+
+</Project>

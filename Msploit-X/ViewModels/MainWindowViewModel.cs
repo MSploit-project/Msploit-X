@@ -37,6 +37,8 @@ namespace Msploit_X.ViewModels
         
         private EnDeCoder enDeCoder = new EnDeCoder();
 
+        private CustomModules customModules = new CustomModules();
+
         public GHDB Ghdb
         {
             get => ghdb;
@@ -90,6 +92,8 @@ namespace Msploit_X.ViewModels
             get => enDeCoder; 
             set => this.RaiseAndSetIfChanged(ref enDeCoder, value);
         }
+
+        public CustomModules CustomModules => customModules;
 
         public void open_link(string link)
         {
