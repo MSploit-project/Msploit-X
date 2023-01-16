@@ -1,7 +1,9 @@
-﻿using ReactiveUI;
+﻿using System.Reflection;
+using ReactiveUI;
 
 namespace Msploit_X.ViewModels.Objects
 {
+    [Obfuscation(Exclude = true)]
     public class ObservableType<T> : ReactiveObject
     {
         private T valueB;

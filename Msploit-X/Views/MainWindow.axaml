@@ -283,7 +283,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Label Grid.Row="1" Content="{Binding CustomModules.SelectedItem.Value.Control}"/>
+                <ScrollViewer Grid.Row="1" Content="{Binding CustomModules.SelectedItem.Value.Control}"/>
             </Grid>
         </TabItem>
         <TabItem Header="Exploit-DB">

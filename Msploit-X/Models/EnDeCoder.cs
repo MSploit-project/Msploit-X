@@ -170,18 +170,7 @@ namespace Msploit_X.Models
         {
             return HttpUtility.HtmlDecode(text);
         }
-
-        /*
-        public static string Encode(this string text)
-        {
-            
-        }
         
-        public static string Decode(this string text)
-        {
-            
-        }
-        */
         public static string LFIEncode(this string text)
         {
             return "data://text/plain;base64," + text.Base64Encode();
