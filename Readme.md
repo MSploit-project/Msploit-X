@@ -7,6 +7,7 @@
     * [Example plugin base](#example-plugin-base)
     * [Example plugin axaml](#example-plugin-axaml)
     * [Example plugin axaml.cs](#example-plugin-axamlcs)
+    * [Example plugin viewmodel](#example-plugin-viewmodel)
 
 ## [Description](#description)
 ### MSploit-X is a revived version of [MSploit](https://github.com/gitmylo/MSploit) with even more features. Made in avalonia with MVVM.
@@ -56,20 +57,25 @@ public class ExampleModule : ModuleBase
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:ExampleModule"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ExampleModule.ExampleControl">
+	<UserControl.DataContext>
+		<vm:ExampleModuleViewModel/>
+	</UserControl.DataContext>
 	<StackPanel>
-		<Label HorizontalAlignment="Center">Content</Label>
-		<Button>Button</Button>
-		<Slider></Slider>
+		<Label HorizontalAlignment="Center" Content="{Binding Slider.Value, StringFormat='Slider is at {0}!'}"/>
+		<Button Content="{Binding Label.Value}" Command="{Binding ButtonCommand}"/>
+		<Slider Minimum="0" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding Slider.Value}"></Slider>
 		<ComboBox></ComboBox>
 		<TextBox></TextBox>
 		<NumericUpDown></NumericUpDown>
 	</StackPanel>
 </UserControl>
+
 ```
 
-### [Example plugin axaml.cs](#example-plugin-axamlcs)
+### [Example plugin axaml.cs](#example-plugin-axamlcs) (It's default)
 ```cs
 public partial class ExampleControl : UserControl
 {
@@ -81,6 +87,21 @@ public partial class ExampleControl : UserControl
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
+    }
+}
+```
+
+### [Example plugin viewmodel](#example-plugin-viewmodel)
+```cs
+public class ExampleModuleViewModel : ViewModelBase
+{
+    public ObservableType<int> Slider { get; } = new(0);
+    public ObservableType<string> Label { get; } = new("Button");
+
+
+    public void ButtonCommand()
+    {
+        Label.Value = "You clicked me!";
     }
 }
 ```
