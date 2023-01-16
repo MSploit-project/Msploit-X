@@ -6,8 +6,8 @@ namespace ExampleModule
 {
     public class ExampleModuleViewModel : ViewModelBase
     {
-        public ObservableType<int> Slider { get; } = new ObservableType<int>(0);
-        public ObservableType<string> Label { get; } = new ObservableType<string>("Button");
+        public ObservableType<int> Slider { get; } = new(0);
+        public ObservableType<string> Label { get; } = new("Button");
 
 
         public void ButtonCommand()
