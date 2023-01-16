@@ -69,10 +69,9 @@ public class ExampleModule : ModuleBase
 		<Slider Minimum="0" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding Slider.Value}"></Slider>
 		<ComboBox></ComboBox>
 		<TextBox></TextBox>
-		<NumericUpDown></NumericUpDown>
+		<NumericUpDown Value="{Binding Slider.Value}"></NumericUpDown>
 	</StackPanel>
 </UserControl>
-
 ```
 
 ### [Example plugin axaml.cs](#example-plugin-axamlcs) (It's default)
