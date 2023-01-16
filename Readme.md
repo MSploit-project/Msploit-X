@@ -105,3 +105,7 @@ public class ExampleModuleViewModel : ViewModelBase
     }
 }
 ```
+
+Then when you're done creating the code and compiling it, simply take the compiled .dll and put it in the "Modules" folder.
+
+done!
