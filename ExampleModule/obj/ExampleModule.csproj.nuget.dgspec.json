@@ -45,19 +45,19 @@
           "dependencies": {
             "Avalonia": {
               "target": "Package",
-              "version": "[11.0.0-preview4, )"
+              "version": "[0.10.18, )"
             },
             "Avalonia.Desktop": {
               "target": "Package",
-              "version": "[11.0.0-preview4, )"
+              "version": "[0.10.18, )"
             },
             "Avalonia.Diagnostics": {
               "target": "Package",
-              "version": "[11.0.0-preview4, )"
+              "version": "[0.10.18, )"
             },
             "Avalonia.ReactiveUI": {
               "target": "Package",
-              "version": "[11.0.0-preview4, )"
+              "version": "[0.10.18, )"
             }
           },
           "imports": [
@@ -120,31 +120,31 @@
             },
             "Avalonia": {
               "target": "Package",
-              "version": "[11.0.0-preview4, )"
+              "version": "[0.10.18, )"
             },
             "Avalonia.AvaloniaEdit": {
               "target": "Package",
-              "version": "[11.0.0-preview2, )"
+              "version": "[0.10.12.2, )"
             },
             "Avalonia.Desktop": {
               "target": "Package",
-              "version": "[11.0.0-preview4, )"
+              "version": "[0.10.18, )"
             },
             "Avalonia.Diagnostics": {
               "target": "Package",
-              "version": "[11.0.0-preview4, )"
+              "version": "[0.10.18, )"
             },
             "Avalonia.ReactiveUI": {
               "target": "Package",
-              "version": "[11.0.0-preview4, )"
+              "version": "[0.10.18, )"
             },
             "Avalonia.Xaml.Interactions": {
               "target": "Package",
-              "version": "[11.0.0-preview4, )"
+              "version": "[0.10.18, )"
             },
             "AvaloniaEdit.TextMate": {
               "target": "Package",
-              "version": "[11.0.0-preview2, )"
+              "version": "[0.10.12.2, )"
             },
             "CsvHelper": {
               "target": "Package",

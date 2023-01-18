@@ -73,7 +73,7 @@
 			<Setter Property="Foreground" Value="white"/>
 		</Style>
 		<Style Selector="TabItem[IsSelected=True] /template/ ContentPresenter#PART_ContentPresenter">
-			<Setter Property="Background" Value="#4277ff"></Setter>
+			<!--<Setter Property="Background" Value="#4277ff"></Setter>-->
 		</Style>
 		<Style Selector="TabItem[IsSelected=True] /template/ TabStripItem">
 			<Setter Property="Background" Value="#000000"/>
