@@ -30,7 +30,7 @@
 
 ## [Api](#api)
 
-To set up the api, create a new dotnet 5 project (Class library), then include MSploit-X.exe and MSploit-X.dll, and Avalonia 11.0.0-Preview4 in the project.
+To set up the api, create a new dotnet 5 project (Class library), then include MSploit-X.exe and MSploit-X.dll, and Avalonia 0.10.18 in the project.
 
 ### [Example plugin base](#example-plugin-base)
 ```cs
